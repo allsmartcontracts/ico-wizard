@@ -199,7 +199,7 @@ export class stepTwo extends React.Component {
             />
           </div>
           <div className="reserved-tokens-title">
-            <p className="title">Зарезервированые токены</p>
+            <p className="title">Зарезервированные токены</p>
           </div>
           <ReservedTokensInputBlock
             state={this.state}
