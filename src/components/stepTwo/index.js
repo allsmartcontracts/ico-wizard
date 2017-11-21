@@ -151,7 +151,7 @@ export class stepTwo extends React.Component {
     if(stepsAreValid(this.state.validations) || allFieldsAreValid('token', this.state)){
       return this.renderLink()
     }
-    return <div onClick={this.showErrorMessages.bind(this, 'token')} className="button button_fill"> Continue</div>
+    return <div onClick={this.showErrorMessages.bind(this, 'token')} className="button button_fill"> Далее</div>
   }
 
   render() {
@@ -162,9 +162,9 @@ export class stepTwo extends React.Component {
         <div className="steps-content container">
           <div className="about-step">
             <div className="step-icons step-icons_token-setup"></div>
-            <p className="title">Token setup</p>
+            <p className="title">Параметры токена</p>
             <p className="description">
-              Configure properties of your token. Created token contract will be ERC-20 compatible.
+              Настройте свойства Вашего ERC-20 совместимого токена.
             </p>
           </div>
           <div className="hidden">
@@ -175,7 +175,7 @@ export class stepTwo extends React.Component {
               value={token.name}
               onBlur={() => this.handleInputBlur('token', 'name')}
               onChange={(e) => this.changeState(e, 'token', 0, 'name')}
-              description={`The name of your token. Will be used by Etherscan and other token browsers. Be afraid of trademarks.`}
+              description={`Название Вашего токена. Используется Etherscan и другими обозревателями блокчейн. Не используйте зарегистрированные товарные знаки.`}
             />
             <InputField
               side='right' type='text'
@@ -185,7 +185,7 @@ export class stepTwo extends React.Component {
               value={token.ticker}
               onBlur={() => this.handleInputBlur('token', 'ticker')}
               onChange={(e) => this.changeState(e, 'token', 0, 'ticker')}
-              description={`The three letter ticker for your token. There are 17,576 combinations for 26 english letters. Be hurry. `}
+              description={`Аббревиатура(3 символа в верхнем регистре). Допустимо 17,576 комбинаций для букв английского алфавита. Поспешите. :-) `}
             />
             <InputField
               side='left' type='number'
@@ -195,11 +195,11 @@ export class stepTwo extends React.Component {
               value={token.decimals}
               onBlur={() => this.handleInputBlur('token', 'decimals')}
               onChange={(e) => this.changeState(e, 'token', 0, 'decimals')}
-              description={`Refers to how divisible a token can be, from 0 (not at all divisible) to 18 (pretty much continuous).`}
+              description={`Определяет кол-во знаков после запятой. Значения от 0(неделимый вовсе) до 18(максимум для ERC-20 токена).`}
             />
           </div>
           <div className="reserved-tokens-title">
-            <p className="title">Reserved tokens</p>
+            <p className="title">Зарезервированые токены</p>
           </div>
           <ReservedTokensInputBlock
             state={this.state}
