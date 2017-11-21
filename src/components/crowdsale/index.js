@@ -150,9 +150,9 @@ export class Crowdsale extends React.Component {
 			<div className="steps-content container">
 				<div className="about-step">
 					<div className="step-icons step-icons_crowdsale-page"></div>
-					<p className="title">Crowdsale Page</p>
+					<p className="title">Статистика краудсейл</p>
 					<p className="description">
-						Page with statistics of crowdsale. Statistics for all tiers combined on the page. Please press Ctrl-D to bookmark the page.
+						Страница статистики краудлейл.Для Вашего удобства, пожалуйста добавьте в закладки(CTRL+D)
 					</p>
 				</div>
 				<div className="total-funds">
@@ -160,13 +160,13 @@ export class Crowdsale extends React.Component {
 						<div className="left">
 							<p className="total-funds-title">{ethRaised} ETH</p>
 							<p className="total-funds-description">
-								Total Raised Funds
+								Всего собрано средств
 							</p>
 						</div>
 						<div className="right">
 							<p className="total-funds-title">{goalInETH} ETH</p>
 							<p className="total-funds-description">
-								Goal
+								Цель
 							</p>
 						</div>
 					</div>
@@ -192,19 +192,19 @@ export class Crowdsale extends React.Component {
 								<div className="left">
 									<p className="title">{tokensClaimed}</p>
 									<p className="description">
-										Tokens Claimed
+										Токенов запрошено
 									</p>
 								</div>
 								<div className="right">
 									<p className="title">{investorsCount}</p>
 									<p className="description">
-										Contributors
+										Участники
 									</p>
 								</div>
 							</div>
 							<p className="hash">{tokenAddr}</p>
 							<p className="description">
-								Token Address
+								Адрес токена
 							</p>
 						</div>
 						<div className="right">
@@ -212,26 +212,26 @@ export class Crowdsale extends React.Component {
 								<div className="left">
 									<p className="title">{tokensPerETH}</p>
 									<p className="description">
-										Price (Tokens/ETH)
+										Цена (Tokens/ETH)
 									</p>
 								</div>
 								<div className="right">
 									<p className="title">{totalSupply}</p>
 									<p className="description">
-										Total Supply
+										Общая эмиссия
 									</p>
 								</div>
 							</div>
 							<p className="hash">{crowdsaleAddr}</p>
 							<p className="description">
-								Crowdsale Contract Address
+								Адрес контракта краудсейл
 							</p>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div className="button-container">
-				<a onClick={this.goToInvestPage} className="button button_fill">Invest</a>
+				<a onClick={this.goToInvestPage} className="button button_fill">Участвовать</a>
 			</div>
 			<Loader show={this.state.loading}></Loader>
 		</section>
