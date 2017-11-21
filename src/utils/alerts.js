@@ -4,7 +4,7 @@ import 'sweetalert/dist/sweetalert.css';
 export function noMetaMaskAlert() {
     sweetAlert({
       title: "Warning",
-      text: "You don't have Metamask installed. Check ICO Wizard GitHub for <a href='https://github.com/oraclesorg/ico-wizard' target='blank'>the instruction</a>.",
+      text: "У Вас не установлен плагин Metamask к браузеру  <a href='https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn' target='blank'>Google Chrome</a>.",
       html: true,
       type: "warning"
     });
@@ -13,7 +13,7 @@ export function noMetaMaskAlert() {
 export function noContractDataAlert() {
     sweetAlert({
       title: "Warning",
-      text: "The crowdsale data is empty. There is nothing to deploy. Please, start ICO Wizard from the beginning.",
+      text: "Параметры краудсейл не заданы .Произошла ошибка. Пожалуйста, запустите конструктур заново",
       html: true,
       type: "warning"
     });
@@ -22,7 +22,7 @@ export function noContractDataAlert() {
 export function noContractAlert() {
     sweetAlert({
       title: "Warning",
-      text: "There is no contract at this address",
+      text: "Адрес не верный, контракт не найден",
       html: true,
       type: "warning"
     });
@@ -31,7 +31,7 @@ export function noContractAlert() {
 export function invalidCrowdsaleAddrAlert() {
     sweetAlert({
       title: "Warning",
-      text: "Invalid crowdsale address is indicated in config and/or in query string.",
+      text: "Неверный адрес контракта краудсейл в настройках либо в запросе.",
       html: true,
       type: "warning"
     });
@@ -40,7 +40,7 @@ export function invalidCrowdsaleAddrAlert() {
 export function invalidNetworkIDAlert() {
     sweetAlert({
       title: "Warning",
-      text: "Invalid network ID is indicated in config and/or in query string.",
+      text: "Неверный идентификатор сети в настройках либо в запросе",
       html: true,
       type: "warning"
     });
@@ -48,8 +48,8 @@ export function invalidNetworkIDAlert() {
 
 export function successfulInvestmentAlert(tokensToInvest) {
     sweetAlert({
-        title: "Success",
-        text: "Congrats! You've successfully bought " + tokensToInvest + " tokens!",
+        title: "Успешно",
+        text: "Поздравляем! Вы успешно приобрели " + tokensToInvest + " токенов!",
         html: true,
         type: "success"
     }, function() {
@@ -60,7 +60,7 @@ export function successfulInvestmentAlert(tokensToInvest) {
 export function investmentDisabledAlert(startBlock, curBlock) {
     sweetAlert({
       title: "Warning",
-      text: "Wait, please. Crowdsale company hasn't started yet. It'll start from <b>" + startBlock + "</b> block. Current block is <b>" + curBlock + "</b>.",
+      text: "Терпение мой друг, Краудсейл будет запущен после <b>" + startBlock + "</b> блока. Текущий блок <b>" + curBlock + "</b>.",
       html: true,
       type: "warning"
     });
@@ -69,7 +69,7 @@ export function investmentDisabledAlert(startBlock, curBlock) {
 export function investmentDisabledAlertInTime(startTime) {
     sweetAlert({
       title: "Warning",
-      text: "Wait, please. Crowdsale company hasn't started yet. It'll start from <b>" + new Date(startTime) + "</b>.",
+      text: "Терпение мой друг, Краудсейл будет запущен <b>" + new Date(startTime) + "</b>.",
       html: true,
       type: "warning"
     });
@@ -78,7 +78,7 @@ export function investmentDisabledAlertInTime(startTime) {
 export function incorrectNetworkAlert(correctNetworkName, incorrectNetworkName) {
     sweetAlert({
       title: "Warning",
-      text: "Crowdsale contract is from <b>" + correctNetworkName + " network</b>. But you are connected to <b>" + incorrectNetworkName + " network</b>. Please, change connection in MetaMask/Oracles plugin.",
+      text: "Краудсейл размещён в сети <b>" + correctNetworkName + " network</b>. Но Вы авторизованы в <b>" + incorrectNetworkName + " network</b>. Please, change connection in MetaMask/Oracles plugin.",
       html: true,
       type: "warning"
     });
@@ -87,7 +87,7 @@ export function incorrectNetworkAlert(correctNetworkName, incorrectNetworkName) 
 export function noDeploymentOnMainnetAlert() {
     sweetAlert({
       title: "Warning",
-      text: "Wizard is under maintenance on Ethereum Mainnet. Please come back later or use Kovan/Rinkeby/Oracles. Follow <a href='https://twitter.com/oraclesorg'>https://twitter.com/oraclesorg</a> for status.",
+      text: "Конструктор в тестовой версии на Ethereum Mainnet. Пожалуйста воспользуйтесь сетями Kovan/Rinkeby/Oracles.",
       html: true,
       type: "warning"
     });
@@ -99,12 +99,12 @@ export function warningOnMainnetAlert(tiersCount, cb) {
     let estimatedTxsCount = tiersCount * 12
     sweetAlert({
       title: "Warning",
-      text: "You are about to sign " + estimatedTxsCount + " TXs. You will see an individual Metamask windows for each of it. Please don't open two or more instances of Wizard in one browser. ICO Wizard will create " + tiersCount + "-tier(s) crowdsale for you. The total cost will be around " + estimatedCost + " ETH. Are you sure you want to proceed?",
+      text: "Вы собираетесь подписать " + estimatedTxsCount + " TXs. Metamask отобразит всплывающее окно для каждой транзакции. Внимание! Не запускайте два и более экземпляра конструктора одновременно! Конструктор создаст " + tiersCount + "-слой(я) краудсейла. Общей стоимостью примерно " + estimatedCost + " ETH. Вы уверены?",
       html: true,
       type: "warning",
       showCancelButton: true,
-      confirmButtonText: 'Yes, I am sure!',
-      cancelButtonText: "No, cancel it!",
+      confirmButtonText: 'Да, вперёд!',
+      cancelButtonText: "Нет, отменить!",
     },
     function(isConfirm) {
         if (isConfirm) {
