@@ -173,9 +173,9 @@ export class ReservedTokensInputBlock extends React.Component {
                         value={token.reservedTokensInput.addr}
                         pristine={this.state.validation.address.pristine}
                         valid={this.state.validation.address.valid}
-                        errorMessage="The inserted address is invalid"
+                        errorMessage="Введённый адрес неверен"
                         onChange={this.handleReservedTokensInputAddrChange}
-                        description={`Address where to send reserved tokens.`}
+                        description={`Адрес для отправки зарезервированных токенов.`}
                       />
                       <RadioInputField
                         side='reserved-tokens-input-property reserved-tokens-input-property-middle'
@@ -185,7 +185,7 @@ export class ReservedTokensInputBlock extends React.Component {
                         defaultValue={token.reservedTokensInput.dim}
                         name={'reserved-tokens-dim'}
                         onChange={this.handleReservedTokensInputDimChange}
-                        description={`Fixed amount or % of crowdsaled tokens. Will be deposited to the account after fintalization of the crowdsale. `}
+                        description={`Фиксированное количество или % процент от распроданных токенов. Будет отправлен на указанный адрес после финализации кампании. `}
                       />
                       <InputField
                         side='reserved-tokens-input-property reserved-tokens-input-property-right'
@@ -193,7 +193,7 @@ export class ReservedTokensInputBlock extends React.Component {
                         title={VALUE}
                         value={token.reservedTokensInput.val}
                         onChange={this.handleReservedTokensInputValChange}
-                        description={`Value in tokens or percents. Don't forget to press + button for each reserved token.`}
+                        description={`Значение в токенах или процентах. Не забудьте нажать + после заполнения.`}
                       />
                     </div>
                     <div className="plus-button-container">
