@@ -555,13 +555,13 @@ export class stepFour extends stepTwo {
         side='left'
         title={'Max cap'}
         value={this.state.crowdsale[i].supply?this.state.crowdsale[i].supply:""}
-        description="How many tokens will be sold on this tier."
+        description="Предполагаемая эмиссия на данном слое."
       />
       let updatableBlock = <DisplayField
         side='right'
         title={'Allow modifying'}
         value={this.state.crowdsale[i].updatable?this.state.crowdsale[i].updatable:"off"}
-        description="Pandora box feature. If it's enabled, a creator of the crowdsale can modify Start time, End time, Rate, Limit after publishing."
+        description="Ящик Пандоры. Если включено, то создатель может изменять Время начала, Время завершения, Курс и Лимит после деплоя контракта."
       />
 
       crowdsaleSetups.push(<div key={i.toString()}><div className="publish-title-container">
@@ -571,27 +571,27 @@ export class stepFour extends stepTwo {
           <div className="hidden">
             <DisplayField
               side='left'
-              title={'Start time'}
+              title={'Время старта'}
               value={this.state.crowdsale[i].startTime?this.state.crowdsale[i].startTime.split("T").join(" "):""}
-              description="Date and time when the tier starts."
+              description="Дата и время запуска слоя."
             />
             <DisplayField
               side='right'
-              title={'End time'}
+              title={'Время завершения'}
               value={this.state.crowdsale[i].endTime?this.state.crowdsale[i].endTime.split("T").join(" "):""}
-              description="Date and time when the tier ends."
+              description="Дата и время завершения слоя."
             />
           </div>
           <div className="hidden">
             <DisplayField
               side='left'
-              title={'Wallet address'}
+              title={'Адрес кошелька'}
               value={this.state.crowdsale[i].walletAddress?this.state.crowdsale[i].walletAddress:""}
-              description="Where the money goes after investors transactions."
+              description="Адрес на который поступает ETH после каждой транзакции покупки токена."
             />
             <DisplayField
               side='right'
-              title={'RATE'}
+              title={'Курс'}
               value={this.state.pricingStrategy[i].rate?this.state.pricingStrategy[i].rate:0 + " ETH"}
               description="Exchange rate Ethereum to Tokens. If it's 100, then for 1 Ether you can buy 100 tokens."
             />
@@ -777,8 +777,8 @@ export class stepFour extends stepTwo {
           </div>
         </div>
         <div className="button-container">
-          <div onClick={this.downloadContractButton} className="button button_fill_secondary">Download File</div>
-          <a onClick={this.goToCrowdsalePage} className="button button_fill">Continue</a>
+          <div onClick={this.downloadContractButton} className="button button_fill_secondary">Скачать исходники</div>
+          <a onClick={this.goToCrowdsalePage} className="button button_fill">Далее</a>
         </div>
         <Loader show={this.state.loading}></Loader>
       </section>
