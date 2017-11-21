@@ -92,9 +92,9 @@ export class stepOne extends React.Component {
         <div className="steps-content container">
           <div className="about-step">
             <div className="step-icons step-icons_crowdsale-contract"></div>
-            <p className="title">Crowdsale Contract</p>
+            <p className="title">Контракт Краудсейл(ICO)</p>
             <p className="description">
-              Select a strategy for your crowdsale contract.
+              Выбрать сценарий для краудсейл(ICO).
             </p>
           </div>
           <div className="radios">
@@ -108,13 +108,13 @@ export class stepOne extends React.Component {
               />
               <span className="title">Whitelist with Cap</span>
               <span className="description">
-                Modern crowdsale strategy with multiple tiers, whitelists, and limits. Recommended for every crowdsale.
+                Актуальный сценарий с несколькими слоями, лимитами, и предрегистрацией участников(whitelist). Рекомендуемый.
               </span>
             </label>
           </div>
         </div>
         <div className="button-container">
-          <Link to={{ pathname: '/2', query: { state: this.state } }}><span className="button button_fill">Continue</span></Link>
+          <Link to={{ pathname: '/2', query: { state: this.state } }}><span className="button button_fill">Далее</span></Link>
         </div>
       </section>
     )}
