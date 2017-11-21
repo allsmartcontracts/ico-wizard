@@ -17,13 +17,13 @@ export class Home extends Component {
         <section className="home">
           <div className="crowdsale">
             <div className="container">
-              <h1 className="title">Welcome to ICO Wizard</h1>
+              <h1 className="title">Конструктор ICO</h1>
               <p className="description">
-              ICO Wizard is a client side tool to create token and crowdsale contracts in five steps. It helps you to publish contracts on the Ethereum network, verify them in Etherscan, create a crowdsale page with stats. For participants, the wizard creates a page to invest into the campaign. 
-              <br/>Smart contracts based on <a href="https://github.com/TokenMarketNet/ico">TokenMarket</a> contracts. 
+              Конструктор ICO позволяет выпустить собственный токен и разместить контракт ICO всего за 5 шагов. С помощью нашего Конструктора Вы сможете запустить компанию по сбору средств(краудсейл) в блокчейне Ethereum, верифицировать контракты токена и ICO  на Etherscan, получить страницу отображающую ход компании по сбору средств и страницу участия в ICO 
+              <br/>Смарт контракты основаны на коде <a href="https://github.com/TokenMarketNet/ico">TokenMarket</a>. 
               </p>
               <div className="buttons">
-                <Link to={{ pathname: '/1', query: { state: this.state } }}><a className="button button_fill">New crowdsale</a></Link>
+                <Link to={{ pathname: '/1', query: { state: this.state } }}><a className="button button_fill">Новая компания</a></Link>
               </div>
             </div>
           </div>
@@ -31,37 +31,37 @@ export class Home extends Component {
             <div className="container">
               <div className="process-item">
                 <div className="step-icons step-icons_crowdsale-contract"></div>
-                <p className="title">Crowdsale Contract</p>
+                <p className="title">Контракт краудсейл</p>
                 <p className="description">
-                  Select a strategy for crowdsale contract
+                  Выберете сценарий
                 </p>
               </div>
               <div className="process-item">
                 <div className="step-icons step-icons_token-setup"></div>
-                <p className="title">Token Setup</p>
+                <p className="title">Параметры токена</p>
                 <p className="description">
-                  Setup token and reserved distribution
+                  Настраивайте и резервируйте токены
                 </p>
               </div>
               <div className="process-item">
                 <div className="step-icons step-icons_crowdsale-setup"></div>
-                <p className="title">Crowdsale Setup</p>
+                <p className="title">Параметры компании</p>
                 <p className="description">
-                  Setup tiers and crowdsale parameters
+                  Создавайте слои и задавайте параметры
                 </p>
               </div>
               <div className="process-item">
                 <div className="step-icons step-icons_publish"></div>
-                <p className="title">Publish</p>
+                <p className="title">Публикация</p>
                 <p className="description">
-                  Get generated code and artifacts for verification in Etherscan
+                  Получите код и метаданные для верификации в Etherscan
                 </p>
               </div>
               <div className="process-item">
                 <div className="step-icons step-icons_crowdsale-page"></div>
-                <p className="title">Crowdsale Page</p>
+                <p className="title">Страница компании</p>
                 <p className="description">
-                  Bookmark this page for the campaign statistics
+                  Занесите в избранное для мониторинга статистики
                 </p>
               </div>
             </div>
