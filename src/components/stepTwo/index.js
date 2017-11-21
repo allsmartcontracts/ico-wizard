@@ -164,7 +164,7 @@ export class stepTwo extends React.Component {
             <div className="step-icons step-icons_token-setup"></div>
             <p className="title">Параметры токена</p>
             <p className="description">
-              Настройте свойства Вашего ERC-20 совместимого токена.
+              Страница настройки параметров Вашего токена. Токены ERC-20 совместимые по умолчанию.
             </p>
           </div>
           <div className="hidden">
@@ -195,7 +195,7 @@ export class stepTwo extends React.Component {
               value={token.decimals}
               onBlur={() => this.handleInputBlur('token', 'decimals')}
               onChange={(e) => this.changeState(e, 'token', 0, 'decimals')}
-              description={`Определяет кол-во знаков после запятой. Значения от 0(неделимый вовсе) до 18(максимум для ERC-20 токена).`}
+              description={`Количество десятичных знаков после запятой. Значения от 0(неделимый) до 18(максимум для ERC-20 токена).`}
             />
           </div>
           <div className="reserved-tokens-title">
