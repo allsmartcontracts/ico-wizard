@@ -76,12 +76,12 @@ export class stepThree extends stepTwo {
 
   renderLink () {
     if (this.state.redirect) {
-      return <Redirect to={{ pathname: '/4', query: { state: this.state, changeState: this.changeState } }}><a className="button button_fill">Continue</a></Redirect>
+      return <Redirect to={{ pathname: '/4', query: { state: this.state, changeState: this.changeState } }}><a className="button button_fill">Далее</a></Redirect>
     }
 
     return <div>
-    <div onClick={() => this.addCrowdsale()} className="button button_fill_secondary"> Add Tier</div>
-    <div onClick={() => warningOnMainnetAlert(this.state.crowdsale.length, () => this.gotoDeploymentStage())} className="button button_fill"> Continue</div>
+    <div onClick={() => this.addCrowdsale()} className="button button_fill_secondary"> Добавить слой</div>
+    <div onClick={() => warningOnMainnetAlert(this.state.crowdsale.length, () => this.gotoDeploymentStage())} className="button button_fill"> Далее</div>
     </div>
   }
 
@@ -91,11 +91,11 @@ export class stepThree extends stepTwo {
     }
 
     return <div>
-      <div onClick={() => this.addCrowdsale()} className="button button_fill_secondary"> Add Tier</div>
+      <div onClick={() => this.addCrowdsale()} className="button button_fill_secondary"> Добавить слой</div>
       <div onClick={() => {
         this.showErrorMessages('crowdsale')
         this.showErrorMessages('pricingStrategy')
-      }} className="button button_fill"> Continue</div>
+      }} className="button button_fill"> Далее</div>
     </div>
   }
   componentDidMount () {
@@ -119,7 +119,7 @@ export class stepThree extends stepTwo {
     let { crowdsale } = this.state
     let { pricingStrategy } = this.state
     let globalSettingsBlock = <div><div className="section-title">
-        <p className="title">Global limits</p>
+        <p className="title">Общие лимиты</p>
       </div>
       <div className='input-block-container'>
         <InputField
@@ -131,7 +131,7 @@ export class stepThree extends stepTwo {
           errorMessage={VALIDATION_MESSAGES.MINCAP}
           onBlur={() => this.handleInputBlur('token', 'globalmincap')}
           onChange={(e) => this.changeState(e, 'token', 0, 'globalmincap')}
-          description={`Minimum amount tokens to buy. Not a mininal size of a transaction. If minCap is 1 and user bought 1 token in a previous transaction and buying 0.1 token it will allow him to buy.`}
+          description={`Минимальное кол-во токенов для покупки новым участником. Это НЕ минимальный размер транзакции. Если minCap=1 то новый участник не может купить 0.5 токена, но может докупить 0.5 после покупки 1го.`}
         />
       </div></div>
       let whitelistInputBlock = <div><div className="section-title">
@@ -146,9 +146,9 @@ export class stepThree extends stepTwo {
           <div className="steps-content container">
             <div className="about-step">
               <div className="step-icons step-icons_crowdsale-setup"></div>
-              <p className="title">Crowdsale setup</p>
+              <p className="title">Настройка краудсейл</p>
               <p className="description">
-              The most important and exciting part of the crowdsale process. Here you can define parameters of your crowdsale campaign.
+              Наиболее важная и захватывающая часть. Здесь Вам предстоит настроить параметры Краудсейл(ICO).
               </p>
             </div>
             <div className="hidden">
@@ -162,7 +162,7 @@ export class stepThree extends stepTwo {
                 errorMessage={VALIDATION_MESSAGES.TIER}
                 onBlur={() => this.handleInputBlur('crowdsale', 'tier', 0)}
                 onChange={(e) => this.changeState(e, 'crowdsale', 0, 'tier')}
-                description={`Name of a tier, e.g. PrePreIco, PreICO, ICO with bonus A, ICO with bonus B, etc. We simplified that and will increment a number after each tier.`}
+                description={`Название слоя, пример: PrePreIco, PreICO, ICO with bonus A, ICO with bonus B, и т.д.. По умолчанию, номер увеличивается с каждым слоем.Только английский алфавит!`}
               />
               <InputFieldExt
                 side='right'
@@ -173,7 +173,7 @@ export class stepThree extends stepTwo {
                 errorMessage={VALIDATION_MESSAGES.WALLET_ADDRESS}
                 onBlur={() => this.handleInputBlur('crowdsale', 'walletAddress', 0)}
                 onChange={(e) => this.changeState(e, 'crowdsale', 0, 'walletAddress')}
-                description={`Where the money goes after investors transactions. Immediately after each transaction. We recommend to setup a multisig wallet with hardware based signers.`}
+                description={`Адрес на который поступает ETH после каждой транзакции покупки токена. Рекомендуем использовать кошельки с мултиподписью и оффлайн авторизацией подписантов.`}
               />
               </div>
               <div className='input-block-container'>
@@ -186,7 +186,7 @@ export class stepThree extends stepTwo {
                 errorMessage={VALIDATION_MESSAGES.START_TIME}
                 onBlur={() => this.handleInputBlur('crowdsale', 'startTime', 0)}
                 onChange={(e) => this.changeState(e, 'crowdsale', 0, 'startTime')}
-                description={`Date and time when the tier starts. Can't be in the past from the current moment.`}
+                description={`Дата и время запуска слоя. Не может быть меньше текущего.`}
               />
               <InputFieldExt
                 side='right'
@@ -197,7 +197,7 @@ export class stepThree extends stepTwo {
                 errorMessage={VALIDATION_MESSAGES.END_TIME}
                 onBlur={() => this.handleInputBlur('crowdsale', 'endTime', 0)}
                 onChange={(e) => this.changeState(e, 'crowdsale', 0, 'endTime')}
-                description={`Date and time when the tier ends. Can be only in the future.`}
+                description={`Дата и время завершения слоя. Может быть только будущее.`}
               />
               </div>
               <div className='input-block-container'>
@@ -210,7 +210,7 @@ export class stepThree extends stepTwo {
                 errorMessage={VALIDATION_MESSAGES.RATE}
                 onBlur={() => this.handleInputBlur('pricingStrategy', 'rate', 0)}
                 onChange={(e) => this.changeState(e, 'pricingStrategy', 0, 'rate')}
-                description={`Exchange rate Ethereum to Tokens. If it's 100, then for 1 Ether you can buy 100 tokens`}
+                description={`Курс обмена Ethereum на Токены. Пример: если rate=100, то Вы получите 100 токенов за 1 ETH`}
               />
               <InputField
                 side='right'
@@ -221,7 +221,7 @@ export class stepThree extends stepTwo {
                 errorMessage={VALIDATION_MESSAGES.SUPPLY}
                 onBlur={() => this.handleInputBlur('crowdsale', 'supply', 0)}
                 onChange={(e) => this.changeState(e, 'crowdsale', 0, 'supply')}
-                description={`How many tokens will be sold on this tier. Cap of crowdsale equals to sum of supply of all tiers`}
+                description={`Предполагаемая эмиссия на данном слое. Общая эмиссия расчитывается суммой значений каждого слоя.`}
               />
               </div>
               <div className='input-block-container'>
@@ -235,7 +235,7 @@ export class stepThree extends stepTwo {
                   defaultValue={this.state.crowdsale[0].updatable}
                   name='crowdsale-updatable-0'
                   onChange={(e) => this.changeState(e, 'crowdsale', 0, 'updatable')}
-                  description={`Pandora box feature. If it's enabled, a creator of the crowdsale can modify Start time, End time, Rate, Limit after publishing.`}
+                  description={`Ящик Пандоры. Если включено, то создатель может изменять Время начала, Время завершения, Курс и Лимит после деплоя контракта.`}
               />
               <RadioInputField
                   side='right'
@@ -247,7 +247,7 @@ export class stepThree extends stepTwo {
                   defaultValue={this.state.crowdsale[0].whitelistdisabled}
                   name='crowdsale-whitelistdisabled-0'
                   onChange={(e) => this.changeState(e, 'crowdsale', 0, 'whitelistdisabled')}
-                  description={`Disables whitelistings. Anyone can buy on the tier.`}
+                  description={`Отключить предварительную регистрацию. На данном слое купить может кто угодно.`}
               />
               </div>
               {this.state.crowdsale[0].whitelistdisabled === "no"?"":globalSettingsBlock}
