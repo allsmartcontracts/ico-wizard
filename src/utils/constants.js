@@ -53,45 +53,45 @@ export const CHAINS = {
 }
 
 export const NAVIGATION_STEPS = {
-	CROWDSALE_CONTRACT: 'Crowdsale Contract',
-	TOKEN_SETUP: 'Token Setup',
-	CROWDSALE_SETUP: 'Crowdsale Setup',
-	PUBLISH: 'Publish',
-	CROWDSALE_PAGE: 'Crowdsale Page'
+	CROWDSALE_CONTRACT: 'Контракт краудсейл',
+	TOKEN_SETUP: 'Параметры токена',
+	CROWDSALE_SETUP: 'Параметры краудсейл',
+	PUBLISH: 'Публикация',
+	CROWDSALE_PAGE: 'Страница краудсейл'
 }
 
 
 export const VALIDATION_MESSAGES = {
-	TIER: 'Please enter a valid tier name between 1-30 characters',
-	NAME: 'Please enter a valid name between 1-30 characters',
-	TICKER: 'Please enter a valid Ticker that is less than three characters',
-	SUPPLY: 'Please enter a valid number greater than 0',
-	DECIMALS: 'Please enter a number greater than or equal to zero',
-	WALLET_ADDRESS: 'Please enter a valid address',
-	START_TIME: 'Please enter a valid date later than now',
-	END_TIME: 'Please enter a valid date later than start time',
-	RATE: 'Please enter a valid number greater than 0'
+	TIER: 'Название слоя от 1 до 30 символов',
+	NAME: 'Название от 1 до 30 символов(ангийский)',
+	TICKER: 'Не более 3х символов(английский)',
+	SUPPLY: 'Положительное число отличное от нуля',
+	DECIMALS: 'Введите число больше либо равное нулю, но меньше либо равное 18',
+	WALLET_ADDRESS: 'Введите корректный адрес кошелька',
+	START_TIME: 'Введите корректное время старта',
+	END_TIME: 'Введите корректное время завершения',
+	RATE: 'Введите положительное число'
 }
 
 export const TEXT_FIELDS = {
-	NAME: 'Name',
-	TICKER: 'Ticker',
-	SUPPLY: 'Supply',
-	DECIMALS: 'Decimals',
-	RATE: 'Rate',
-	WALLET_ADDRESS: 'Wallet Address',
-	START_TIME: 'Start Time',
-	END_TIME: 'End Time',
+	NAME: 'Название',
+	TICKER: 'Аббревиатура',
+	SUPPLY: 'Эмиссия',
+	DECIMALS: 'Десятичные',
+	RATE: 'Курс',
+	WALLET_ADDRESS: 'Адрес кошелька',
+	START_TIME: 'Время старта',
+	END_TIME: 'Время завершения',
 	CROWDSALE_SETUP_NAME: 'Crowdsale setup name',
-	ADDRESS: 'Address',
+	ADDRESS: 'Адрес',
 	MIN: 'Min',
 	MAX: 'Max',
-	MINCAP: 'Investor min cap',
-	DIMENSION: 'Dimension',
-	VALUE: 'Value',
-	MAX_CAP: 'Max cap',
-	ALLOWMODIFYING: 'Allow modifying',
-	DISABLEWHITELISTING: 'Disable whitelisting'
+	MINCAP: 'Минимальный лимит инвестора',
+	DIMENSION: 'Размерность',
+	VALUE: 'Значение',
+	MAX_CAP: 'Максимальный лимит',
+	ALLOWMODIFYING: 'Модифицируемый',
+	DISABLEWHITELISTING: 'Отключить предрегистрацию'
 }
 
 export const VALIDATION_TYPES = {
@@ -320,9 +320,9 @@ export const TOAST = {
 		SUCCESS: 'warning'
 	},
 	MESSAGE: {
-		USER_REJECTED_TRANSACTION: 'User Rejected Transaction',
-		CONTRACT_DOWNLOAD_FAILED: 'Contract Download failed',
-		CONTRACT_DOWNLOAD_SUCCESS: 'A file with contracts and metadata downloaded on your computer'},
+		USER_REJECTED_TRANSACTION: 'Пользователь отклонил транзакцию',
+		CONTRACT_DOWNLOAD_FAILED: 'Загрузка контракта неудалась',
+		CONTRACT_DOWNLOAD_SUCCESS: 'Архив с кодом контракта загружен'},
 	DEFAULT_OPTIONS: {
 		position: 'top right',
 		offset: '80px 14',
