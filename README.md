@@ -7,34 +7,34 @@
 [![Waffle.io - Columns and their card count](https://badge.waffle.io/oraclesorg/ico-wizard.svg?columns=all)](http://waffle.io/oraclesorg/ico-wizard)
 [![Join the chat at https://gitter.im/oraclesorg/ico-wizard](https://badges.gitter.im/oraclesorg/ico-wizard.svg)](https://gitter.im/oraclesorg/ico-wizard?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-_Attention_!
+_Внимание_!
 
-Please, read instruction before you'll start to create crowdsales using ICO Wizard. Consider to deploy on the Mainnet _after_ testing on Kovan testnet.   
+Пожалуйста, ознакомьтесь с данной инструкцией прежде чем Вы соберётесь проводить ICO с помощью данного конструктора. Надеемся, Вы будете размещать(деплоить) контракты своего ICO в основной сети EThereum ТОЛЬКО после серии тестов а тестовой сети Kovan.   
 
-- [ICO Wizard DApp](#ico-wizard-dapp)
-  * [Introduction](#introduction)
+- [Конструктор ICO DApp](#ico-wizard-dapp)
+  * [Введение](#introduction)
   * [Demo](#demo)
-  * [Requirements](#requirements)
-  * [Strategy](#strategy)
-  * [How to run](#how-to-run)
-    + [Run local version for development](#run-local-version-for-development)
-    + [ICO configuration](#ico-configuration)
-    + [Tests](#tests)
-  * [Deploying of crowdsale to Mainnet](#deploying-of-crowdsale-to-mainnet)
-    + [Time](#time)
-    + [Price](#price)
-  * [How to verify ICO Wizard contracts in Etherscan](#how-to-verify-ico-wizard-contracts-in-etherscan)
-    + [Crowdsale contract verification:](#crowdsale-contract-verification)
-  * [Projects built on ICO Wizard](#projects-built-on-ico-wizard)
+  * [Требования](#requirements)
+  * [Сценарий](#strategy)
+  * [Как запустить](#how-to-run)
+    + [Локальная версия](#run-local-version-for-development)
+    + [Конфигурация ICO](#ico-configuration)
+    + [Тесты](#tests)
+  * [Публикация краудсейл в основной сети Ethereum](#deploying-of-crowdsale-to-mainnet)
+    + [Время](#time)
+    + [Стоимость](#price)
+  * [Как верифицировать контракты ICO в Etherscan](#how-to-verify-ico-wizard-contracts-in-etherscan)
+    + [Верификация контракта краудсейл:](#crowdsale-contract-verification)
+  * [Проекты построенные на Конструкторе ICO](#projects-built-on-ico-wizard)
   * [Contributors guide](#contributors-guide)
-  * [Support](#support)
+  * [Поддержка](#support)
   * [Notable Contributors](#notable-contributors)
-  * [Disclaimer](#disclaimer)
+  * [Отказ от ответсвенности](#disclaimer)
 
 
-## Introduction
+## Введение
 
-A quote: `ICO tools should be available for non-coders for free. Raising funds from a crowd is our basic human right.`
+Цитата: `ICO tools should be available for non-coders for free. Raising funds from a crowd is our basic human right.` "Инструменты для организации ICO должны быть открыто доступны для непрограммистов. Возможность привлечь средства от неравнодушных граждан - это  неотъемлимое право человека."
 
 ICO wizard is a tool to create token and crowdsale contracts in five simple steps.  Wizard is based on  [TokenMarket](https://github.com/TokenMarketNet/ico) contracts. Wizard is baked how we like it: decentralized, client side, serverless, open source, free, awesome.
 
