@@ -34,7 +34,7 @@ _Внимание_!
 
 ## Введение
 
-Цитата: `ICO tools should be available for non-coders for free. Raising funds from a crowd is our basic human right.` "Инструменты для организации ICO должны быть открыто доступны для непрограммистов. Возможность привлечь средства от неравнодушных граждан - это  неотъемлимое право человека."
+Цитата: `ICO tools should be available for non-coders for free. Raising funds from a crowd is our basic human right.` "Инструменты для организации ICO должны быть открыто доступны для непрограммистов. Возможность организовать народное финансирование проекта - это  неотъемлимое право человека."
 
 ICO wizard is a tool to create token and crowdsale contracts in five simple steps.  Wizard is based on  [TokenMarket](https://github.com/TokenMarketNet/ico) contracts. Wizard is baked how we like it: decentralized, client side, serverless, open source, free, awesome.
 
