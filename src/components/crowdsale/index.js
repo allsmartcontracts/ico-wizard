@@ -150,9 +150,9 @@ export class Crowdsale extends React.Component {
 			<div className="steps-content container">
 				<div className="about-step">
 					<div className="step-icons step-icons_crowdsale-page"></div>
-					<p className="title">Статистика краудсейл</p>
+					<p className="title">Статистика краудсейл кампании</p>
 					<p className="description">
-						Страница статистики краудлейл.Для Вашего удобства, пожалуйста добавьте в закладки(CTRL+D)
+						Страница статистики кампании.Для Вашего удобства, пожалуйста добавьте в закладки(CTRL+D)
 					</p>
 				</div>
 				<div className="total-funds">
