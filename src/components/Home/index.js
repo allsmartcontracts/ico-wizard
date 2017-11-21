@@ -59,9 +59,9 @@ export class Home extends Component {
               </div>
               <div className="process-item">
                 <div className="step-icons step-icons_crowdsale-page"></div>
-                <p className="title">Страница компании</p>
+                <p className="title">Страница кампании</p>
                 <p className="description">
-                  Занесите в избранное для мониторинга статистики
+                  Добавьте в избранное для мониторинга статистики
                 </p>
               </div>
             </div>
