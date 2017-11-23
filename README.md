@@ -43,31 +43,34 @@ ICOs usually have two or more contracts. One token contract and one or more crow
 
 ## Demo
 
-You can try it on [https://wizard.oracles.org](https://wizard.oracles.org) or watch a demo
+Вы можете попробовать контсруктор в работе [https://wizard.oracles.org](https://wizard.oracles.org) или посмотреть демонстрацию
 
 [![Demo](https://img.youtube.com/vi/Hvs1gICcXGU/0.jpg)](https://www.youtube.com/watch?v=Hvs1gICcXGU)
 
-## Requirements
+## Требования
 
 - Google Chrome, Chromium, or Google Chrome Canary
-- [Metamask](https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn). Ethereum web wallet for Google Chrome. Must have to publish contracts to the network.
-- Kovan testnet coins.
-    -  Create an account in Metamask, copy it's address and ask for free coins on [Kovan's gitter](https://gitter.im/kovan-testnet/faucet)
-- Parity for manual operations, e.g., adding people to whitelist after creation of crowdsales, finalizing, etc.
-    -  [How to install Parity](https://github.com/paritytech/parity/wiki/Setup)
-    - Sync it. `parity --chain kovan --warp ui`
-    - Export private key from Metamask and import in to Parity in UI.
-- Patience. Metamask doesn't support bulk transactions. Simplest crowdsale will ask you to sign ~10 transactions. 
-## Strategy
+- [Metamask](https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn). Онлайн кошелёк блокчейна Ethereum. Необходим для подписи транзакций и публикации контрактов в сети Ethereum.
+- Тестовый ETH сети Kovan.
+    -  Создайте аккаунт в Metamsk затем попросите перевести Вам немного тестового эфира здесь -  [Kovan's gitter](https://gitter.im/kovan-testnet/faucet)
+- Кошелёк Parity с нодой либо аккаунт myetherwallet для выполнения операций вручную(добавления аккаунтов в whitelist, финализации краудсейла, изменения параметров кампании после публикации и т.д.).
+    -  [Инструкция по установке Parity](https://github.com/paritytech/parity/wiki/Setup)
+    - Обязательно дождитесь синхронизации Parity.
+      Команда запуска Parity для работы в тестоваой сети Kovan - `parity --chain kovan --warp ui`
+    - Экспортируйте Ваш приватный ключ из Metamask и импортируйте его в Parity или MEV с помощью интерфейса кошелька.
+- Немного терпения. Metamask не поддерживает групповые транзакции. Для публикации простейшего сценария краудсейл кампании Вам придется подписать около 10 транзакций.
+ 
+## Сценарий
 
-At the moment, the Wizard supports one type of crowdsale contract, the mighty "whitelisted with tiers and cap". This strategy is popular in modern ICOs due to regulatory involvement in the process (September 2017). A native approach to comply with regulation is to perform KYC of buyers and restrict participants from democratic countries, e.g., the U.S. or PRC. 
+В настоящий время, конструктор поддерживает только 1 сценарий краудсейл кампании -  "С предварительной регистрацией и лимитами". Такой подход очень популярен среди текущих ICO(по состоянию на сентябрь 2017) и хорошо зарекомендовал себя в индустрии. Предварительная регистрация в данном сценарии, позволяет реализовать концепцию (KYC - Знай Своего Клиента) и ограничить доступ к краудсейл кампании для некоторых участников. 
 
-Features of "Whitelisted with tiers and cap" strategy:
-- Tiers. A crowdsale can have one or more tiers. Each tier has a set of configurable parameters:
-    -  Wallet address. Collected funds will be sent to the wallet address immediately after receiving from a participant of the crowdsale.
-    -  Start time. A time when a tier of crowdsale will start. You can't set up time in the past. 
-    -  End time. A time when a tier of crowdsale will end.
-    -  Rate. Exchange rate for a token to the ether. E.g., exchange rate 100 means that for one ether you can buy 100 tokens.
+Возможности сценария:
+
+- Слои. Кампания может состоять из одно или более(до 4х на данный момент) слоёв. В каждый слой конфигурируется по следующим параметрам:
+    -  Адрес кошелька. Контракт краудсейл кампании незамедлительно отправляет средства на указанный адрес, таким образом сам контракт не накапливает ETH, что положительно влияет на безопасность кампании.
+    -  Время запуска. Время, с которого в кампании начинают действовать условия данного слоя. 
+    -  Время завершения. Время окончания действия условий данного слоя.
+    -  Курс. Обменный курс ETH/Token определяет количество токенов которое можно получить за 1 ETH.
     -  Supply. The maximum amount of tokens available to buy in a tier. Max cap of the crowdsale equals to the sum of all supply of all tiers.
     -  Allow modifying. Controversial feature aka "Box of Pandora". It allows owners to modify Start time, End time, Rate, and Supply after the crowdsale. 
 - Whitelist. A crowdsale can have one or more whitelisted addresses. If there are no whitelisted addresses than nobody can buy tokens on that tier. Whitelists are inherited. E.g., if a user was on Tier 1 and didn't buy max cap on Tier 1, he can buy on Tier 2, and other tiers.  Can be updated after the creation of the crowdsale using parity client. Each whitelist has a set of configurable parameters:
