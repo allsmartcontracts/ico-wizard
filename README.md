@@ -71,7 +71,7 @@ ICOs usually have two or more contracts. One token contract and one or more crow
     -  Время запуска. Время, с которого в кампании начинают действовать условия данного слоя. 
     -  Время завершения. Время окончания действия условий данного слоя.
     -  Курс. Обменный курс ETH/Token определяет количество токенов которое можно получить за 1 ETH.
-    -  Supply. The maximum amount of tokens available to buy in a tier. Max cap of the crowdsale equals to the sum of all supply of all tiers.
+    -  Эмиссия. Максимально возможное для приебретения в текущем слое количество токенов. Общий лимит на кампанию расчитывается исходя из суммы лимитов на каждом слое.
     -  Allow modifying. Controversial feature aka "Box of Pandora". It allows owners to modify Start time, End time, Rate, and Supply after the crowdsale. 
 - Whitelist. A crowdsale can have one or more whitelisted addresses. If there are no whitelisted addresses than nobody can buy tokens on that tier. Whitelists are inherited. E.g., if a user was on Tier 1 and didn't buy max cap on Tier 1, he can buy on Tier 2, and other tiers.  Can be updated after the creation of the crowdsale using parity client. Each whitelist has a set of configurable parameters:
     -  Address. Whitelisted ethereum address.
