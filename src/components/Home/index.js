@@ -23,7 +23,7 @@ export class Home extends Component {
               <br/>Смарт контракты основаны на коде <a href="https://github.com/TokenMarketNet/ico">TokenMarket</a>. 
               </p>
               <div className="buttons">
-                <Link to={{ pathname: '/1', query: { state: this.state } }}><a className="button button_fill">Новая компания</a></Link>
+                <Link to={{ pathname: '/1', query: { state: this.state } }}><a className="button button_fill">Новая кампания</a></Link>
               </div>
             </div>
           </div>
@@ -45,7 +45,7 @@ export class Home extends Component {
               </div>
               <div className="process-item">
                 <div className="step-icons step-icons_crowdsale-setup"></div>
-                <p className="title">Параметры компании</p>
+                <p className="title">Параметры кампании</p>
                 <p className="description">
                   Создавайте слои и задавайте параметры
                 </p>
