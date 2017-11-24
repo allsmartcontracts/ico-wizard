@@ -11,7 +11,7 @@ export const Footer = () => (
 			  <a href="https://twitter.com/" className="social social_twitter"></a>
         <a href="http://www.allsmartcontracts.ru" className="social social_oracles"></a>
         <a href="https://t.me" className="social social_telegram"></a>
-        <a href="https://github.com/" className="social social_github"></a>
+        <a href="https://github.com/allsmartcontracts/ico-wizard" className="social social_github"></a>
 			</div>
 		</div>
 	</footer>
