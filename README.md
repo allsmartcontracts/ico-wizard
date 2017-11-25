@@ -79,8 +79,7 @@ ICOs usually have two or more contracts. One token contract and one or more crow
     -  Max. The maximum amount of tokens to buy. 
 
 ## How to run
-
-Open [https://wizard.oracles.org](https://wizard.oracles.org) and follow steps.
+Перейдите на [https://ico-wizard.allsmartcontracts.ru](https://ico-wizard.allsmartcontracts.ru) и следуйте указаниями конструктора.
 
 ### Run local version for development
 
@@ -330,11 +329,11 @@ We appreciate contributors from the community:
 - Jeff Christian
 - Roman Storm
 
-## Disclaimer
+## Отказ от ответственности
 
-The software is in Beta stage. 
-ICO Wizard is constantly under active development. The “Beta” labelling implies that while the core features of the software have been implemented, bugs and issues may still remain undiscovered until this phase of testing is complete. As such, ICO Wizard may experience the following issues, but not limited to, during usage:
+ВНИМАНИЕ! Програмное обеспечение находится в стадии Beta!
+Возможны следующие(не исчерпывающие) ошибки:
 
-- lost of tokens/funds from incorrect configuration;
-- unexpected delays;
-- unexpected visual artifacts.
+- потеря токенов/средств в следствии некорретного конфигурирования;
+- задержки в работе;
+- дефекты отображения.
