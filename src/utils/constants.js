@@ -53,11 +53,11 @@ export const CHAINS = {
 }
 
 export const NAVIGATION_STEPS = {
-	CROWDSALE_CONTRACT: 'Контракт краудсейл',
+	CROWDSALE_CONTRACT: 'Контракт кампании',
 	TOKEN_SETUP: 'Параметры токена',
-	CROWDSALE_SETUP: 'Параметры краудсейл',
+	CROWDSALE_SETUP: 'Параметры кампании',
 	PUBLISH: 'Публикация',
-	CROWDSALE_PAGE: 'Страница краудсейл'
+	CROWDSALE_PAGE: 'Страница статистики'
 }
 
 
