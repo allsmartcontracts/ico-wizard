@@ -11,7 +11,7 @@ export const StepNavigation = ({activeStep}) => (
 			<div className={getStepClass(TOKEN_SETUP, activeStep)}>Параметры токена</div>
 			<div className={getStepClass(CROWDSALE_SETUP, activeStep)}>Параметры кампании</div>
 			<div className={getStepClass(PUBLISH, activeStep)}>Публикация</div>
-			<div className={getStepClass(CROWDSALE_PAGE, activeStep)}>Страница кампании</div>
+			<div className={getStepClass(CROWDSALE_PAGE, activeStep)}>Статистика кампании</div>
 		</div>
 	</div>
 )
