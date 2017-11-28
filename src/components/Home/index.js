@@ -71,7 +71,7 @@ export class Home extends Component {
               </div>
               <div className="process-item">
                 <div className="step-icons step-icons_crowdsale-setup"></div>
-                <p className="title">Параметры компании</p>
+                <p className="title">Параметры кампании</p>
                 <p className="description">
                   Создавайте слои и задавайте параметры
                 </p>
