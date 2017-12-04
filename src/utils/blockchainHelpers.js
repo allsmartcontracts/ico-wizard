@@ -47,9 +47,8 @@ export function getWeb3(cb) {
     cb(web3, false);
   } else {
 	  //get current network
-	  if (web3.currentProvider!=ICOconfig.NetworkID){
-		  const infuraID="Https://{ICODconfig.NetworkID}.infura.io/DI0Ayd5pD4v0mFuuR3Zn";
-		  }
+          const infuraID="Https://{ICOConfig.NetworkID}.infura.io/DI0Ayd5pD4v0mFuuR3Zn";
+		  
 	  var cnetwork
     // window.web3 == web3 most of the time. Don't override the provided,
     // web3, just wrap it in your Web3. adding INFURA for NoMetamsk
