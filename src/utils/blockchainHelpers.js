@@ -2,6 +2,7 @@ import Web3 from 'web3';
 import { incorrectNetworkAlert, noMetaMaskAlert, invalidNetworkIDAlert } from './alerts'
 import { getEncodedABIClientSide } from './microservices'
 import { GAS_PRICE, CHAINS } from './constants'
+import {networkID} from 'ICOConfig'
 
 // instantiate new web3 instance
 const web3 = new Web3();
@@ -45,11 +46,16 @@ export function getWeb3(cb) {
 
     cb(web3, false);
   } else {
+	  //get current network
+	  if (web3.currentProvider!=ICOconfig.NetworkID){
+		  const infuraID="Https://{ICODconfig.NetworkID}.infura.io/DI0Ayd5pD4v0mFuuR3Zn";
+		  }
+	  var cnetwork
     // window.web3 == web3 most of the time. Don't override the provided,
-    // web3, just wrap it in your Web3.
-    var myWeb3 = new Web3(web3.currentProvider);
+    // web3, just wrap it in your Web3. adding INFURA for NoMetamsk
+    var InfuraCnonnect = new Web3(web3.provider.HttpProvider({infuraID}));
 
-    cb(myWeb3, false);
+    cb(InfuraCnonnect, false);
   }
   return myWeb3;
 }
