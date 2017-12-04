@@ -2,7 +2,7 @@ import Web3 from 'web3';
 import { incorrectNetworkAlert, noMetaMaskAlert, invalidNetworkIDAlert } from './alerts'
 import { getEncodedABIClientSide } from './microservices'
 import { GAS_PRICE, CHAINS } from './constants'
-import { ICOConfig } from '../Components/Common/config'
+import { ICOConfig } from '../сomponents/Common/config'
 
 // instantiate new web3 instance
 const web3 = new Web3();
