@@ -61,9 +61,10 @@ export function getWeb3(cb) {
 
     cb(web3, false);
   }
-  return web3;
-  } else {
+	  else {
 	  console.error("Please use a web3 browser");}
+  return web3;
+  } 
 	  
 }
 
