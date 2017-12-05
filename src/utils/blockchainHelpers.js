@@ -52,7 +52,7 @@ export function getWeb3(cb) {
 	  var cnetwork
     // window.web3 == web3 most of the time. Don't override the provided,
     // web3, just wrap it in your Web3. adding INFURA for NoMetamsk
-    var InfuraConnect = new Web3(web3.provider.HttpProvider('{infuraID}'));
+    var InfuraConnect = new Web3(new web3.provider.HttpProvider('{infuraID}'));
 
     cb(InfuraConnect, false);
   }
