@@ -51,8 +51,8 @@ export function getWeb3(cb) {
 	  //get current network
 	  const networkID = ICOConfig.networkID?ICOConfig.networkID:getQueryVariable("networkID");
 	  if (networkName!='ORACLES'){
-	  var networkName = getNetWorkNameById(networkID);
-          let infuraID='https://${networkName}.infura.io/DI0Ayd5pD4v0mFuuR3Zn';
+	  var networkName = getNetWorkNameById("networkID");
+          let infuraID="https://${networkName}.infura.io/DI0Ayd5pD4v0mFuuR3Zn";
 		  
 	  var cnetwork
     // window.web3 == web3 most of the time. Don't override the provided,
