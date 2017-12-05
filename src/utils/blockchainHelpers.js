@@ -48,7 +48,8 @@ export function getWeb3(cb) {
     cb(web3, false);
   } else {
 	  //get current network
-	  var networkName = getNetWorkNameById(ICOConfig.networkID);
+	  const networkID = ICOConfig.networkID?ICOConfig.networkID:getQueryVariable("networkID");
+	  var networkName = getNetWorkNameById(networkID);
           const infuraID="https://"+{networkName}+".infura.io/DI0Ayd5pD4v0mFuuR3Zn";
 		  
 	  var cnetwork
