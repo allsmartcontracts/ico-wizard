@@ -3,6 +3,7 @@ import { incorrectNetworkAlert, noMetaMaskAlert, invalidNetworkIDAlert } from '.
 import { getEncodedABIClientSide } from './microservices'
 import { GAS_PRICE, CHAINS } from './constants'
 import { ICOConfig } from '../../src/components/Common/config'
+import { getQueryVariable} from './utils'
 
 // instantiate new web3 instance
 const web3 = new Web3();
