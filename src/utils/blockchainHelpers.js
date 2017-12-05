@@ -49,9 +49,9 @@ export function getWeb3(cb) {
     cb(web3, false);
   } else {
 	  //get current network
-	  const networkID = ICOConfig.networkID?ICOConfig.networkID:getQueryVariable("networkID");
-	  var networkName = getNetWorkNameById(networkID);
-          const infuraID=('https://${networkName}!.infura.io/DI0Ayd5pD4v0mFuuR3Zn');
+	 // const networkID = ICOConfig.networkID?ICOConfig.networkID:getQueryVariable("networkID");
+	 // var networkName = getNetWorkNameById(networkID);
+          const infuraID=('https://mainnet.infura.io/DI0Ayd5pD4v0mFuuR3Zn');
 		  
 	  var cnetwork
     // window.web3 == web3 most of the time. Don't override the provided,
