@@ -3,7 +3,7 @@ import { incorrectNetworkAlert, noMetaMaskAlert, invalidNetworkIDAlert } from '.
 import { getEncodedABIClientSide } from './microservices'
 import { GAS_PRICE, CHAINS } from './constants'
 import { ICOConfig } from '../../src/components/Common/config'
-import { getQueryVariable} from './utils'
+
 
 // instantiate new web3 instance
 const web3 = new Web3();
@@ -48,8 +48,8 @@ export function getWeb3(cb) {
     cb(web3, false);
   } else {
 	  //get current network
-	  const networkID = ICOConfig.networkID;
-          const infuraID="https://"+{networkID}+".infura.io/DI0Ayd5pD4v0mFuuR3Zn";
+	  {const networkName = getNetWorkNameById(ICOConfig.networkID)};
+          const infuraID="https://"+{networkName}+".infura.io/DI0Ayd5pD4v0mFuuR3Zn";
 		  
 	  var cnetwork
     // window.web3 == web3 most of the time. Don't override the provided,
