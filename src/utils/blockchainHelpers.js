@@ -2,6 +2,9 @@ import Web3 from 'web3';
 import { incorrectNetworkAlert, noMetaMaskAlert, invalidNetworkIDAlert } from './alerts'
 import { getEncodedABIClientSide } from './microservices'
 import { GAS_PRICE, CHAINS } from './constants'
+import { ICOConfig } from '../../src/components/Common/config'
+import { getQueryVariable} from './utils'
+
 
 // instantiate new web3 instance
 const web3 = new Web3();
@@ -45,13 +48,23 @@ export function getWeb3(cb) {
 
     cb(web3, false);
   } else {
+	  //get current network
+	  const networkID = ICOConfig.networkID?ICOConfig.networkID:getQueryVariable("networkID");
+	  if (networkName!='ORACLES'){
+	  var networkName = getNetWorkNameById(networkID);
+          let infuraID='https://${networkName}.infura.io/DI0Ayd5pD4v0mFuuR3Zn';
+		  
+	  var cnetwork
     // window.web3 == web3 most of the time. Don't override the provided,
-    // web3, just wrap it in your Web3.
-    var myWeb3 = new Web3(web3.currentProvider);
+    // web3, just wrap it in your Web3. adding INFURA for NoMetamsk
+    var web3 = new Web3(new Web3.providers.HttpProvider('{infuraID}'));
 
-    cb(myWeb3, false);
+    cb(web3, false);
   }
-  return myWeb3;
+  return web3;
+  } else {
+	  console.error("Please use a web3 browser");}
+	  
 }
 
 export function checkNetWorkByID(web3, _networkIdFromGET) {
