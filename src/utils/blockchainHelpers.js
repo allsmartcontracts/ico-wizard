@@ -50,7 +50,7 @@ export function getWeb3(cb) {
   } else {
 	  //get current network
 	  const networkID = ICOConfig.networkID?ICOConfig.networkID:getQueryVariable("networkID");
-	  if (networkName!='ORACLES'){
+   if (networkName!='ORACLES') {
 	  var networkName = getNetWorkNameById(networkID);
           let infuraID='https://${networkName}.infura.io/DI0Ayd5pD4v0mFuuR3Zn';
 		  
@@ -61,9 +61,12 @@ export function getWeb3(cb) {
 
     cb(web3, false);
   }
+	  else {
+	  console.error("Please use a web3 browser");
+	  }
   return web3;
-  } else {
-	  console.error("Please use a web3 browser");}
+  } 
+	
 	  
 }
 
