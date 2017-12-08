@@ -9,6 +9,10 @@ import {
 import AlertContainer from 'react-alert'
 import { TOAST } from './utils/constants'
 import { toast } from './utils/utils'
+import {MobxIntlProvider, LocaleStore} from "mobx-react-intl"
+import {addLocaleData} from "react-intl"
+import en from "./translations/en"
+import ru from "./translations/ru"
 
 console.log('stepThree', stepThree, 'stepTwo', stepTwo)
 class App extends Component {
