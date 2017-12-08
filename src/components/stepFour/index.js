@@ -1,5 +1,6 @@
 import React from 'react'
 import '../../assets/stylesheets/application.css'
+import {Toolbar} from '../Header/index.js';
 import { checkWeb3, deployContract, getNetworkVersion } from '../../utils/blockchainHelpers'
 import {
   addWhiteListRecursive,
