@@ -4,6 +4,7 @@ import '../../assets/stylesheets/application.css';
 import { Link } from 'react-router-dom'
 import {injectIntl} from "react-intl"
 import {inject,observer} from "mobx-react"
+import {formatMessage} from 'format-message'
 
 
           
