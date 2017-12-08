@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom'
 import {injectIntl} from "react-intl"
 import {observer} from "mobx-react"
 
+@ inject {'injectIntl', 'localeStore'} @observer
+          
 export class Home extends Component {
   render() {
     return (
