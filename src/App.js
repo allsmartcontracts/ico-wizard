@@ -14,12 +14,23 @@ import {addLocaleData} from "react-intl"
 import en from "./translations/en"
 import ru from "./translations/ru"
 
+import enLocale from 'react-intl/locale-data/en';
+import ruLocale from 'react-intl/locale-data/ru';
+addLocaleData([...ruLocale, ...enLocale]);
+const localeStore = new LocaleStore("en", {en, ru});
+    const store = {
+    locale: localeStore,
+};
+
 console.log('stepThree', stepThree, 'stepTwo', stepTwo)
 class App extends Component {
   render() {
     var crowdsaleAddr = getQueryVariable("addr");
+    
     return (
       <Router>
+      <Provider {...store}>
+        <MobxIntlProvider>
         <div>
           <Header/>
           <Route exact path="/" component={crowdsaleAddr?Crowdsale:Home}/>
@@ -32,6 +43,8 @@ class App extends Component {
           <Footer/>
           <AlertContainer ref={a => toast.msg = a} {...TOAST.DEFAULT_OPTIONS} />
         </div>
+      </MobxIntlProvider>
+    </Provider>
       </Router>
     )
   }
