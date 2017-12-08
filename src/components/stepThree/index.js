@@ -1,5 +1,6 @@
 import React from 'react'
 import '../../assets/stylesheets/application.css';
+import {Toolbar} from '../Header/index.js';
 import { Link } from 'react-router-dom'
 import { setExistingContractParams } from '../../utils/blockchainHelpers'
 import { defaultCompanyStartDate } from './utils'
