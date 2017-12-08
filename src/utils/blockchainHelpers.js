@@ -2,13 +2,14 @@ import Web3 from 'web3';
 import { incorrectNetworkAlert, noMetaMaskAlert, invalidNetworkIDAlert } from './alerts'
 import { getEncodedABIClientSide } from './microservices'
 import { GAS_PRICE, CHAINS } from './constants'
+import { web3Store } from '../stores'
 
 // instantiate new web3 instance
-const web3 = new Web3();
+const web3 = web3Store.web3
 
 // get current provider
 export function getCurrentProvider() {
-	console.log(web3.currentProvider);
+  console.log(web3.currentProvider);
   return web3.currentProvider;
 }
 
@@ -35,7 +36,7 @@ export function checkWeb3(web3) {
 
 export function getWeb3(cb) {
   var web3 = window.web3;
-	if (typeof web3 === 'undefined') {
+  if (typeof web3 === 'undefined') {
     // no web3, use fallback
     console.error("Please use a web3 browser");
     const devEnvironment = process.env.NODE_ENV === 'development';
@@ -73,27 +74,20 @@ export function checkNetWorkByID(web3, _networkIdFromGET) {
 
 export function getNetWorkNameById(_id) {
   switch (parseInt(_id, 10)) {
-    case 1: {
+    case 1:
       return CHAINS.MAINNET;
-    } break;
-    case 2: {
+    case 2:
       return CHAINS.MORDEN;
-    } break;
-    case 3: {
+    case 3:
       return CHAINS.ROPSTEN;
-    } break;
-    case 4: {
+    case 4:
       return CHAINS.RINKEBY;
-    } break;
-    case 42: {
+    case 42:
       return CHAINS.KOVAN;
-    } break;
-     case 12648430: {
-       return CHAINS.ORACLES;
-    }  break;
-    default: {
+    case 12648430:
+      return CHAINS.ORACLES;
+    default:
       return null;
-    } break;
   }
 }
 
@@ -104,158 +98,171 @@ export function getNetworkVersion(web3) {
   return Promise.resolve(null);
 }
 
-export function setExistingContractParams(abi, addr, $this) {
-  let state = $this.state;
+export function setExistingContractParams(abi, addr, setContractProperty) {
   setTimeout(function() {
     getWeb3((web3) => {
       attachToContract(web3, abi, addr, function(err, crowdsaleContract) {
-        let propsCount = 0;
-        let cbCount = 0;
-        propsCount++;
         crowdsaleContract.token.call(function(err, tokenAddr) {
-          cbCount++;
           console.log("tokenAddr: " + tokenAddr);
-          state.contracts.token.addr = tokenAddr;
-
-          if (propsCount === cbCount) {
-            $this.setState(state);
-          }
+          setContractProperty('token', 'addr', tokenAddr)
         });
 
-        propsCount++;
         crowdsaleContract.multisigWallet.call(function(err, multisigWalletAddr) {
-          cbCount++;
           console.log("multisigWalletAddr: " + multisigWalletAddr);
-          state.contracts.multisig.addr = multisigWalletAddr;
-
-          if (propsCount === cbCount) {
-            $this.setState(state);
-          }
+          setContractProperty('multisig', 'addr', multisigWalletAddr)
         });
       });
     })
   });
 }
 
-export function deployContract(i, web3, abi, bin, params, state, cb) {
-  getEncodedABIClientSide(web3, abi, state, params, i, (ABIencoded) => {
-    console.log(ABIencoded);
-    let binFull = bin + ABIencoded.substr(2);
-    web3.eth.getAccounts().then(function(accounts) {
-      web3.eth.estimateGas({
-        from: accounts[0],
-        data: binFull
-      }, function(err, estimatedGas) {
-        if (err) console.log('errrrrrrrrrrrrrrrrr', err);
-        console.log('gas is estimated', estimatedGas, 'err', err)
-        let estimatedGasMax = 3716260;
-        if (!estimatedGas) estimatedGas = estimatedGasMax;
-        if (estimatedGas > estimatedGasMax) estimatedGas = estimatedGasMax;
-        else estimatedGas += 100000;
+export function deployContract(i, web3, abi, bin, params) {
+  const abiContent = abi.slice()
 
-        let contractInstance = new web3.eth.Contract(abi);
+  return getEncodedABIClientSide(web3, abiContent, params, i)
+    .then(ABIEncoded => {
+      let binFull = bin + ABIEncoded.substr(2)
 
-        let deployOpts = {
-          data: "0x" + bin,
-          arguments: params
-        };
+      console.log(ABIEncoded)
 
-        let sendOpts = {
-          from: accounts[0],
-          gas: estimatedGas,
-          gasPrice: GAS_PRICE
-        };
+      return web3.eth.getAccounts()
+        .then(accounts => {
+          return web3.eth.estimateGas({ from: accounts[0], data: binFull })
+            .then(
+              estimatedGas => estimatedGas,
+              err => console.log('errrrrrrrrrrrrrrrrr', err)
+            )
+            .then(estimatedGas => {
+              console.log('gas is estimated', estimatedGas)
 
-        let isMined = false;
+              const estimatedGasMax = 3716260
 
-        contractInstance.deploy(deployOpts).send(sendOpts)
-        .on('error', function(error) {
-          console.log(error);
-          return cb(error, null);
-        })
-        .on('transactionHash', function(transactionHash){
-          console.log("contract deployment transaction: " + transactionHash);
-
-          checkTxMined(web3, transactionHash, function txMinedCallback(receipt) {
-            if (isMined) return;
-
-            if (receipt) {
-              if (receipt.blockNumber) {
-                console.log("Contract deployment is mined from polling of tx receipt");
-                isMined = true;
-                console.log(receipt.contractAddress) // instance with the new contract address
-                return cb(null, receipt.contractAddress);
+              if (!estimatedGas || estimatedGas > estimatedGasMax) {
+                estimatedGas = estimatedGasMax
               } else {
-                console.log("Still mining... Polling of transaction once more");
-                setTimeout(function() {
-                  checkTxMined(web3, transactionHash, txMinedCallback)
-                }, 5000);
+                estimatedGas += 100000
               }
+
+              console.log('abi', abi)
+
+              const objAbi = JSON.parse(JSON.stringify(abi))
+              let contractInstance = new web3.eth.Contract(objAbi)
+
+              let deployOpts = {
+                data: '0x' + bin,
+                arguments: params
+              }
+
+              let sendOpts = {
+                from: accounts[0],
+                gas: estimatedGas,
+                gasPrice: GAS_PRICE
+              }
+
+              let isMined = false
+
+              return new Promise((resolve, reject) => {
+                contractInstance.deploy(deployOpts).send(sendOpts)
+                  .on('error', error => {
+                    console.log(error)
+                    reject(error)
+                  })
+                  .on('transactionHash', transactionHash => {
+                    console.log('contract deployment transaction: ' + transactionHash)
+
+                    checkTxMined(web3, transactionHash, function txMinedCallback (receipt) {
+                      if (isMined) return
+
+                      if (receipt) {
+                        if (receipt.blockNumber) {
+                          console.log('Contract deployment is mined from polling of tx receipt')
+                          console.log(receipt.contractAddress) // instance with the new contract address
+
+                          isMined = true
+                          resolve(receipt.contractAddress)
+                        } else {
+                          console.log('Still mining... Polling of transaction once more')
+
+                          setTimeout(() => {
+                            checkTxMined(web3, transactionHash, txMinedCallback)
+                          }, 5000)
+                        }
+                      } else {
+                        console.log('Still mining... Polling of transaction once more')
+
+                        setTimeout(() => {
+                          checkTxMined(web3, transactionHash, txMinedCallback)
+                        }, 5000)
+                      }
+                    })
+                  })
+                  .then(newContractInstance => {
+                    if (!isMined) {
+                      console.log('Contract deployment is mined from Promise')
+                      console.log(newContractInstance.options.address) // instance with the new contract address
+
+                      isMined = true
+                      resolve(newContractInstance.options.address)
+                    }
+                  })
+              })
+            })
+        })
+    })
+}
+
+export function sendTXToContract(web3, method) {
+  return new Promise((resolve, reject) => {
+    let isMined = false
+
+    method
+      .on('error', reject)
+      .on('transactionHash', transactionHash => {
+        console.log("contract method transaction: " + transactionHash);
+
+        // This additional polling of tx receipt was made, because users had problems on mainnet: wizard hanged on random
+        // transaction, because there wasn't response from it, no receipt. Especially, if you switch between tabs when
+        // wizard works.
+        // https://github.com/oraclesorg/ico-wizard/pull/364/files/c86c3e8482ef078e0cb46b8bebf57a9187f32181#r152277434
+        checkTxMined(web3, transactionHash, function txMinedCallback(receipt) {
+          if (isMined) return
+
+          if (receipt) {
+            if (receipt.blockNumber) {
+              console.log("Sending tx to contract is mined from polling of tx receipt");
+              isMined = true
+
+              if (0 !== +receipt.status || null === receipt.status) {
+                resolve()
+              } else {
+                reject({ message: 0 })
+              }
+
             } else {
               console.log("Still mining... Polling of transaction once more");
-              setTimeout(function() {
+              setTimeout(() => {
                 checkTxMined(web3, transactionHash, txMinedCallback)
-              }, 5000);
+              }, 5000)
             }
-          })
-        })
-        .on('confirmation', function(confirmationNumber, receipt) { })
-        .then(function(newContractInstance){
-          if (!isMined) {
-            console.log("Contract deployment is mined from Promise");
-            isMined = true;
-            console.log(newContractInstance.options.address) // instance with the new contract address
-            cb(null, newContractInstance.options.address);
+          } else {
+            console.log("Still mining... Polling of transaction once more");
+            setTimeout(() => {
+              checkTxMined(web3, transactionHash, txMinedCallback)
+            }, 5000)
           }
-        });
-      });
-    });
-  });
-}
+        })
+      })
+      .on('receipt', receipt => {
+        if (isMined) return
+        isMined = true
 
-export function sendTXToContract(web3, method, cb) {
-  let isMined = false;
-  method
-  .on('error', function(error) {
-    console.log(error);
-    return cb(error);
-  })
-  .on('transactionHash', function(transactionHash){
-    console.log("contract method transaction: " + transactionHash);
-
-    checkTxMined(web3, transactionHash, function txMinedCallback(receipt) {
-      if (isMined) return;
-
-      if (receipt) {
-        if (receipt.blockNumber) {
-          console.log("Sending tx to contract is mined from polling of tx receipt");
-          isMined = true;
-          console.log(receipt) // instance with the new contract address
-          return cb();
+        if (0 !== +receipt.status || null === receipt.status) {
+          resolve()
         } else {
-          console.log("Still mining... Polling of transaction once more");
-          setTimeout(function() {
-            checkTxMined(web3, transactionHash, txMinedCallback)
-          }, 5000);
+          reject({ message: 0 })
         }
-      } else {
-        console.log("Still mining... Polling of transaction once more");
-        setTimeout(function() {
-          checkTxMined(web3, transactionHash, txMinedCallback)
-        }, 5000);
-      }
-    })
+      })
   })
-  .on('confirmation', function(confirmationNumber, receipt){
-  })
-  .then(function(result){
-    if (!isMined) {
-      console.log("Sending tx to contract is mined from Promise");
-      isMined = true;
-      console.log(result) // instance with the new contract address
-      cb();
-    }
-  });
 }
 
 export function checkTxMined(web3, txhash, cb) {
@@ -266,17 +273,19 @@ export function checkTxMined(web3, txhash, cb) {
   });
 }
 
-export function attachToContract(web3, abi, addr, cb) {
-  web3.eth.getAccounts().then((accounts) => {
-    web3.eth.defaultAccount = accounts[0];
-		console.log("web3.eth.defaultAccount:" + web3.eth.defaultAccount);
+export function attachToContract(web3, abi, addr) {
+  return new Promise(resolve => {
+    web3.eth.getAccounts()
+      .then(accounts => {
+        web3.eth.defaultAccount = accounts[0]
+        console.log('web3.eth.defaultAccount:' + web3.eth.defaultAccount)
 
-		let contractInstance = new web3.eth.Contract(abi, addr, {
-      from: web3.eth.defaultAccount
-    });
+        const objAbi = JSON.parse(JSON.stringify(abi))
+        const contractInstance = new web3.eth.Contract(objAbi, addr, { from: web3.eth.defaultAccount })
 
-		if (cb) cb(null, contractInstance);
-  });
+        resolve(contractInstance)
+      })
+  })
 }
 
 // export web3 object instance

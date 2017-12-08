@@ -1,93 +1,75 @@
 import React from 'react'
 import '../../assets/stylesheets/application.css';
-import { checkWeb3, getWeb3, getNetworkVersion } from '../../utils/blockchainHelpers'
-import { Link } from 'react-router-dom'
-import { defaultState } from '../../utils/constants'
+import { checkWeb3 } from '../../utils/blockchainHelpers'
+import { Link } from 'react-router-dom';
 import { setFlatFileContentToState } from '../../utils/utils';
-import { getOldState } from '../../utils/utils'
-import { StepNavigation } from '../Common/StepNavigation'
-import { NAVIGATION_STEPS } from '../../utils/constants'
-import { noDeploymentOnMainnetAlert } from '../../utils/alerts'
-const { CROWDSALE_CONTRACT } = NAVIGATION_STEPS
+import { StepNavigation } from '../Common/StepNavigation';
+import { NAVIGATION_STEPS, CONTRACT_TYPES } from '../../utils/constants';
+import { inject, observer } from 'mobx-react';
+const { CROWDSALE_CONTRACT } = NAVIGATION_STEPS;
 
+
+@inject('contractStore', 'web3Store') @observer
 export class stepOne extends React.Component {
-  constructor(props) {
-    super(props);
-    window.scrollTo(0, 0);
-    let oldState = getOldState(props, defaultState)
-    this.state = Object.assign({}, oldState)
+
+  getStandardCrowdsaleAssets() {
+    this.getCrowdsaleAsset("CrowdsaleStandard", "crowdsale")
+    this.getCrowdsaleAsset("CrowdsaleStandardToken", "token")
   }
 
-  getWhiteListWithCapCrowdsaleAssets (state) {
-    this.getCrowdsaleAsset("SafeMathLibExt", "safeMathLib", state)
-    this.getCrowdsaleAsset("CrowdsaleWhiteListWithCap", "crowdsale", state)
-    this.getCrowdsaleAsset("CrowdsaleWhiteListWithCapToken", "token", state)
-    this.getCrowdsaleAsset("CrowdsaleWhiteListWithCapPricingStrategy", "pricingStrategy", state)
-    this.getCrowdsaleAsset("CrowdsaleWhiteListWithCapPricingStrategy", "pricingStrategy", state)
-    this.getCrowdsaleAsset("FinalizeAgent", "finalizeAgent", state)
-    this.getCrowdsaleAsset("NullFinalizeAgent", "nullFinalizeAgent", state)
+  getWhiteListWithCapCrowdsaleAssets () {
+    this.getCrowdsaleAsset("SafeMathLibExt", "safeMathLib")
+    this.getCrowdsaleAsset("CrowdsaleWhiteListWithCap", "crowdsale")
+    this.getCrowdsaleAsset("CrowdsaleWhiteListWithCapToken", "token")
+    this.getCrowdsaleAsset("CrowdsaleWhiteListWithCapPricingStrategy", "pricingStrategy")
+    this.getCrowdsaleAsset("CrowdsaleWhiteListWithCapPricingStrategy", "pricingStrategy")
+    this.getCrowdsaleAsset("FinalizeAgent", "finalizeAgent")
+    this.getCrowdsaleAsset("NullFinalizeAgent", "nullFinalizeAgent")
   }
 
-  getCrowdsaleAsset(contractName, stateProp, state) {
-    let src, bin, abi;
-    let assetsCount = 3;
-    let assetsIterator = 0;
+  getCrowdsaleAsset(contractName, stateProp) {
+    const src = setFlatFileContentToState(`./contracts/${contractName}_flat.sol`)
+    const bin = setFlatFileContentToState(`./contracts/${contractName}_flat.bin`)
+    const abi = setFlatFileContentToState(`./contracts/${contractName}_flat.abi`)
 
-    setFlatFileContentToState("./contracts/" + contractName + "_flat.sol", (_content) => {
-      src = _content;
-      assetsIterator++;
-
-      if (assetsIterator === assetsCount) {
-        this.addContractsToState(src, bin, abi, stateProp, state);
-      }
-    });
-    setFlatFileContentToState("./contracts/" + contractName + "_flat.bin", (_bin) => {
-      bin = _bin;
-      assetsIterator++;
-
-      if (assetsIterator === assetsCount) {
-        this.addContractsToState(src, bin, abi, stateProp, state);
-      }
-    });
-    setFlatFileContentToState("./contracts/" + contractName + "_flat.abi", (_abi) => {
-      abi = _abi;
-      assetsIterator++;
-
-      if (assetsIterator === assetsCount) {
-        this.addContractsToState(src, bin, abi, stateProp, state);
-      }
-    });
+    Promise.all([src, bin, abi])
+      .then(result => this.addContractsToState(...result, stateProp))
+      .catch(console.error)
   }
 
-  addContractsToState (src, bin, abi, contract, state) {
-    state.contracts[contract] = {
+  addContractsToState(src, bin, abi, contract) {
+    this.props.contractStore.setContract(contract, {
       src,
       bin,
       abi: JSON.parse(abi),
       addr: (contract==="crowdsale" || contract==="pricingStrategy" || contract==="finalizeAgent")?[]:"",
       abiConstructor: (contract==="crowdsale" || contract==="pricingStrategy" || contract==="finalizeAgent")?[]:""
-    }
-    this.setState(state)
+    });
   }
 
   contractTypeSelected(e) {
-    let newState = { ...this.state }
-    newState.contractType = e.currentTarget.id;
-    this.getWhiteListWithCapCrowdsaleAssets(newState);
+    this.props.contractStore.setContractType(e.currentTarget.id);
+    this.getWhiteListWithCapCrowdsaleAssets();
   }
 
   componentDidMount() {
-    checkWeb3(this.state.web3);
+    checkWeb3(this.props.web3Store.web3);
 
-    let newState = { ...this.state }
-
-    newState.contractType = this.state.contractTypes.whitelistwithcap
-    this.getWhiteListWithCapCrowdsaleAssets(newState);
+    switch (this.props.contractStore.contractType) {
+      case CONTRACT_TYPES.standard:
+        this.getStandardCrowdsaleAssets();
+        break;
+      case CONTRACT_TYPES.whitelistwithcap:
+        this.getWhiteListWithCapCrowdsaleAssets();
+        break;
+      default:
+        break;
+    }
   }
 
   render() {
     return (
-    	 <section className="steps steps_crowdsale-contract">
+       <section className="steps steps_crowdsale-contract">
        <StepNavigation activeStep={CROWDSALE_CONTRACT}/>
         <div className="steps-content container">
           <div className="about-step">
@@ -101,9 +83,9 @@ export class stepOne extends React.Component {
             <label className="radio">
               <input
                 type="radio"
-                checked={this.state.contractType === this.state.contractTypes.whitelistwithcap}
+                checked={this.props.contractStore.contractType === CONTRACT_TYPES.whitelistwithcap}
                 name="contract-type"
-                id={this.state.contractTypes.whitelistwithcap}
+                id={CONTRACT_TYPES.whitelistwithcap}
                 onChange={(e) => this.contractTypeSelected(e)}
               />
               <span className="title">Whitelist with Cap</span>
@@ -114,8 +96,11 @@ export class stepOne extends React.Component {
           </div>
         </div>
         <div className="button-container">
-          <Link to={{ pathname: '/2', query: { state: this.state } }}><span className="button button_fill">Continue</span></Link>
+          <Link to='/2'>
+            <span className="button button_fill">Continue</span>
+          </Link>
         </div>
       </section>
-    )}
+    )
+  }
 }

@@ -1,10 +1,9 @@
 import React from 'react';
 import '../../assets/stylesheets/application.css';
 import {VALIDATION_TYPES} from '../../utils/constants';
-
 const {INVALID} = VALIDATION_TYPES;
 
-const InputField = props => {
+export const InputField = props => {
   const errorStyle = {
     color: 'red',
     fontWeight: 'bold',
@@ -15,10 +14,6 @@ const InputField = props => {
 
   const error = props.valid === INVALID ? props.errorMessage : '';
 
-  const errorMessageElement = (error && !props.pristine) ?
-    <p style={errorStyle}>{error}</p> :
-    null
-
   return (
     <div className={props.side}>
       <label className="label">{props.title}</label>
@@ -27,13 +22,11 @@ const InputField = props => {
         type={props.type}
         className="input"
         onBlur={props.onBlur}
-        value={props.value || ''}
-        onChange={e => props.onChange(e)}
+        value={props.value}
+        onChange={props.onChange}
       />
       <p className="description">{props.description}</p>
-      { errorMessageElement }
+      { props.pristine ? null : <p style={errorStyle}>{error}</p> }
     </div>
   );
 };
-
-export default InputField;
