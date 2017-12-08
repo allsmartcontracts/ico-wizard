@@ -19,8 +19,9 @@ export class Home extends Component {
             <div className="container">
               <h1 className="title">Конструктор ICO</h1>
               <p className="description">
-              Конструктор ICO позволяет выпустить собственный токен и разместить контракт ICO всего за 5 шагов. С помощью нашего Конструктора Вы сможете запустить кампанию по сбору средств(краудсейл) в блокчейне Ethereum, верифицировать контракты токена и ICO  на Etherscan, получить страницу отображающую ход компании по сбору средств и страницу участия в ICO 
+              Конструктор ICO позволяет выпустить собственный токен и разместить контракт ICO всего за 5 шагов. С помощью нашего Конструктора Вы сможете запустить кампанию по сбору средств(краудсейл) в блокчейне Ethereum, верифицировать контракты токена и ICO  на Etherscan, получить страницу статистики кампании по сбору средств и страницу участника в ICO 
               <br/>Смарт контракты основаны на коде <a href="https://github.com/TokenMarketNet/ico">TokenMarket</a>. 
+              <br/>Для использования конструктора Вам необходим плагин <a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn">MetaMask</a> к браузеру Google Chrome!
               </p>
               <div className="buttons">
                 <Link to={{ pathname: '/1', query: { state: this.state } }}><a className="button button_fill">Новая кампания</a></Link>
