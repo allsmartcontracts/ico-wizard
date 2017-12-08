@@ -12,13 +12,12 @@ export class Home extends Component {
         <section className="home">
           <div className="crowdsale">
             <div className="container">
-              <h1 className="title">Welcome to ICO Wizard</h1>
+              <h1 className="title">{formatMessage({id: "Home_title1"})}</h1>
               <p className="description">
-              ICO Wizard is a client side tool to create token and crowdsale contracts in five steps. It helps you to publish contracts on the Ethereum network, verify them in Etherscan, create a crowdsale page with stats. For participants, the wizard creates a page to invest into the campaign.
-              <br/>Smart contracts based on <a href="https://github.com/TokenMarketNet/ico">TokenMarket</a> contracts.
+              {formatMessage({id: "Home_desc1"})}<br/>{formatMessage({id: "Home_desc11"})}
               </p>
               <div className="buttons">
-                <Link to='/1'><a className="button button_fill">New crowdsale</a></Link>
+                <Link to='/1'><a className="button button_fill">{formatMessage({id: "Home_Butt1"})}</a></Link>
               </div>
             </div>
           </div>
@@ -26,16 +25,16 @@ export class Home extends Component {
             <div className="container">
               <div className="process-item">
                 <div className="step-icons step-icons_crowdsale-contract"></div>
-                <p className="title">Crowdsale Contract</p>
+                <p className="title">{formatMessage({id: "Home_title_contract"})}</p>
                 <p className="description">
-                  Select a strategy for crowdsale contract
+                  {formatMessage({id: "Home_desc_contract"})}
                 </p>
               </div>
               <div className="process-item">
                 <div className="step-icons step-icons_token-setup"></div>
-                <p className="title">Token Setup</p>
+                <p className="title">{formatMessage({id: "Home_title_token"})}</p>
                 <p className="description">
-                  Setup token and reserved distribution
+                  {formatMessage({id: "Home_desc_token"})}
                 </p>
               </div>
               <div className="process-item">
