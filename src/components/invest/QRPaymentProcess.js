@@ -1,5 +1,6 @@
 import React from 'react'
 import QRCode from 'qrcode.react';
+import {Toolbar} from '../Header/index.js';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 const QRPaymentProcess = ({ crowdsaleAddress }) => {
