@@ -3,7 +3,7 @@ import '../../assets/stylesheets/application.css';
 import { Link } from 'react-router-dom'
 
 export const Header = () => (
-	<header className="header">
+	<header className="socials">
     <div className="container">
      const Toolbar = ({locale}) => <div>
     <select value={locale.value} onChange={(event) => locale.value = event.target.value}>
