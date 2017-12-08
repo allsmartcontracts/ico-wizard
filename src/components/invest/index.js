@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactCountdownClock from 'react-countdown-clock'
+import {Toolbar} from '../Header/index.js';
 import { checkNetWorkByID, checkTxMined, sendTXToContract } from '../../utils/blockchainHelpers'
 import {
   findCurrentContractRecursively,
