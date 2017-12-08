@@ -1,5 +1,6 @@
 import React from 'react'
 import '../../assets/stylesheets/application.css';
+import {Toolbar} from '../Header/index.js';
 import { checkWeb3 } from '../../utils/blockchainHelpers'
 import { Link } from 'react-router-dom';
 import { setFlatFileContentToState } from '../../utils/utils';
