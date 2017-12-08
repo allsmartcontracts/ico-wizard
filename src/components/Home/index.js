@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import {Toolbar} from '../Header/index.js';
 import '../../assets/stylesheets/application.css';
 import { Link } from 'react-router-dom'
+import {injectIntl} from "react-intl"
+import {observer} from "mobx-react"
 
 export class Home extends Component {
   render() {
