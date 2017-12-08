@@ -3,9 +3,10 @@ import {Toolbar} from '../Header/index.js';
 import '../../assets/stylesheets/application.css';
 import { Link } from 'react-router-dom'
 import {injectIntl} from "react-intl"
-import {observer} from "mobx-react"
+import {inject,observer} from "mobx-react"
 
-@ inject {injectIntl} @observer
+@inject {'injectIntl'}
+@observer
           
 export class Home extends Component {
   render() {
