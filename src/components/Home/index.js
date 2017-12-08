@@ -5,8 +5,7 @@ import { Link } from 'react-router-dom'
 import {injectIntl} from "react-intl"
 import {inject,observer} from "mobx-react"
 
-@inject {'injectIntl'}
-@observer
+
           
 export class Home extends Component {
   render() {
@@ -68,3 +67,4 @@ export class Home extends Component {
     );
   }
 }
+export default injectIntl(observer(Home));
