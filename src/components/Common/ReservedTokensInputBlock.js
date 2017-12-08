@@ -1,208 +1,185 @@
-import React from 'react'
-import Web3 from 'web3'
+import React from 'react';
+import Web3 from 'web3';
 import '../../assets/stylesheets/application.css';
-import InputField from './InputField'
-import { RadioInputField } from './RadioInputField'
-import { TEXT_FIELDS, defaultState, VALIDATION_TYPES } from '../../utils/constants'
-import ReservedTokensItem from './ReservedTokensItem'
-import { getOldState } from '../../utils/utils'
-import update from 'immutability-helper'
+import {InputField} from './InputField';
+import {RadioInputField} from './RadioInputField';
+import {TEXT_FIELDS, VALIDATION_TYPES} from '../../utils/constants';
+import ReservedTokensItem from './ReservedTokensItem';
+import update from 'immutability-helper';
+import {inject, observer} from 'mobx-react';
+const {VALID, INVALID} = VALIDATION_TYPES;
 
-const { ADDRESS, DIMENSION, VALUE } = TEXT_FIELDS
-const {INVALID, VALID} = VALIDATION_TYPES;
+const {ADDRESS, DIMENSION, VALUE} = TEXT_FIELDS;
 
+@inject('reservedTokenStore', 'reservedTokenInputStore', 'reservedTokenElementStore') @observer
 export class ReservedTokensInputBlock extends React.Component {
+  constructor(props) {
+    super(props);
 
-    constructor(props) {
-        super(props);
+    this.state = {
+      validation: {
+        address: {
+          pristine: true,
+          valid: INVALID
+        }
+      }
+    }
+  }
 
-        let oldState = getOldState(props, defaultState)
-        this.state = Object.assign({}, oldState, {
-            validation: {
-                address: {
-                    valid: INVALID,
-                    pristine: true
-                }
-            }
-        })
+  updateReservedTokenInput = (event, property) => {
+    const value = event.target.value;
+    this.props.reservedTokenInputStore.setProperty(property, value);
+  };
+
+  addReservedTokensItem = () => {
+    const addr = this.props.reservedTokenInputStore.addr.toString();
+    const dim = this.props.reservedTokenInputStore.dim.toString();
+    const val = this.props.reservedTokenInputStore.val.toString();
+
+    this.setState(update(this.state, {
+      validation: {
+        address: {
+          pristine: { $set: false }
+        }
+      }
+    }))
+
+    if (!addr || !dim || !val || this.state.validation.address.valid === INVALID) {
+      return;
     }
 
-    addReservedTokensItem = (addr, dim, val) => {
-        if (this.state.validation.address.valid === INVALID) {
-            this.setState(update(this.state, {
-                validation: {
-                    address: {
-                        pristine: { $set: false }
-                    }
-                }
-            }))
-            return;
+    this.setState(update(this.state, {
+      validation: {
+        address: {
+          $set: {
+            pristine: true,
+            valid: INVALID
+          }
         }
+      }
+    }))
 
-        if (!dim || !val) {
-            return
-        }
+    this.props.reservedTokenInputStore.clearInput();
 
-        let state = update(this.state, {
-            token: {
-                reservedTokensInput: {
-                    $merge: {
-                        addr: '',
-                        val: ''
-                    }
-                }
-            }
-        })
+    let newToken = {
+      addr: addr,
+      dim: dim,
+      val: val,
+    };
 
-        let isAdded = false;
-        for (let i = 0; i < this.state.token.reservedTokens.length; i++) {
-            let item = this.state.token.reservedTokens[i];
-            if (item.addr === addr && item.dim === dim && !item.deleted) {
-                isAdded = true;
-                break;
-            }
-        }
-
-        if (isAdded) return;
-
-        state = update(state, {
-            token: {
-                reservedTokens: {
-                    $push: [{
-                        addr,
-                        dim,
-                        val
-                    }]
-                }
-            }
-        })
-
-        this.props.onTokensChange(state.token.reservedTokens)
-        this.setState(state);
+    if (!this.props.reservedTokenStore.findToken(newToken)) {
+      this.props.reservedTokenStore.addToken(newToken);
     }
+  };
 
-    handleReservedTokensInputAddrChange = (e) => {
-        this.props.onChange(e, 'token', 0, 'reservedtokens_addr')
+  removeReservedToken = index => {
+    this.props.reservedTokenStore.removeToken(index);
+  };
 
-        const address = e.target.value
-        const validAddress = Web3.utils.isAddress(address) ?  VALID : INVALID
-
-        this.setState(update(this.state, {
-            validation: {
-                address: {
-                    $set: {
-                        valid: validAddress,
-                        pristine: false
-                    }
-                }
+  handleReservedTokensInputDimChange = e => {
+    this.props.onChange(e, 'token', 0, 'reservedtokens_dim');
+    this.setState(
+      update(this.state, {
+        token: {
+          reservedTokensInput: {
+            dim: {
+              $set: e.target.value,
             },
-            token: {
-                reservedTokensInput: {
-                    addr: {
-                        $set: address
-                    }
-                }
-            }
-        }))
-    }
+          },
+        },
+      }),
+    );
+  };
 
-    handleReservedTokensInputDimChange = (e) => {
-        this.props.onChange(e, 'token', 0, 'reservedtokens_dim')
-        this.setState(update(this.state, {
-            token: {
-                reservedTokensInput: {
-                    dim: {
-                        $set: e.target.value
-                    }
-                }
-            }
-        }))
-    }
+  handleReservedTokensInputValChange = e => {
+    this.props.onChange(e, 'token', 0, 'reservedtokens_val');
+    this.setState(
+      update(this.state, {
+        token: {
+          reservedTokensInput: {
+            val: {
+              $set: e.target.value,
+            },
+          },
+        },
+      }),
+    );
+  };
 
-    handleReservedTokensInputValChange = (e) => {
-        this.props.onChange(e, 'token', 0, 'reservedtokens_val')
-        this.setState(update(this.state, {
-            token: {
-                reservedTokensInput: {
-                    val: {
-                        $set: e.target.value
-                    }
-                }
-            }
-        }))
-    }
+  handleAddressChange = e => {
+    this.updateReservedTokenInput(e, 'addr')
 
-    removeToken(index) {
-        const newState = update(this.state, {
-            token: {
-                reservedTokens: {
-                    $splice: [[index, 1]]
-                }
-            }
-        })
+    const address = e.target.value
+    const isAddressValid = Web3.utils.isAddress(address) ? VALID : INVALID;
 
-        this.props.onTokensChange(newState.token.reservedTokens)
-        this.setState(newState)
-    }
+    const newState = update(this.state, {
+      validation: {
+        address: {
+          $set: {
+            pristine: false,
+            valid: isAddressValid
+          },
+        },
+      },
+    });
 
-    render() {
-        let { token } = this.state
+    this.setState(newState)
+  }
 
-        const reservedTokensElements = this.state.token.reservedTokens
-            .map((token, index) => {
-                return (
-                    <ReservedTokensItem
-                        key={index.toString()}
-                        num={index}
-                        addr={token.addr}
-                        dim={token.dim}
-                        val={token.val}
-                        onRemove={(index) => this.removeToken(index)}>
-                    </ReservedTokensItem>
-                )
-            })
+  render() {
+    const reservedTokensElements = this.props.reservedTokenStore.tokens.map((token, index) => {
+      return (
+        <ReservedTokensItem
+          key={index.toString()}
+          num={index}
+          addr={token.addr}
+          dim={token.dim}
+          val={token.val}
+          onRemove={index => this.removeReservedToken(index)}
+        />
+      );
+    });
 
-        return (
-            <div className="reserved-tokens-container">
-                <div className="reserved-tokens-input-container">
-                    <div className="reserved-tokens-input-container-inner">
-                      <InputField
-                        side='reserved-tokens-input-property reserved-tokens-input-property-left'
-                        type='text'
-                        title={ADDRESS}
-                        value={token.reservedTokensInput.addr}
-                        pristine={this.state.validation.address.pristine}
-                        valid={this.state.validation.address.valid}
-                        errorMessage="The inserted address is invalid"
-                        onChange={this.handleReservedTokensInputAddrChange}
-                        description={`Address where to send reserved tokens.`}
-                      />
-                      <RadioInputField
-                        side='reserved-tokens-input-property reserved-tokens-input-property-middle'
-                        title={DIMENSION}
-                        items={["tokens", "percentage"]}
-                        vals={["tokens", "percentage"]}
-                        defaultValue={token.reservedTokensInput.dim}
-                        name={'reserved-tokens-dim'}
-                        onChange={this.handleReservedTokensInputDimChange}
-                        description={`Fixed amount or % of crowdsaled tokens. Will be deposited to the account after fintalization of the crowdsale. `}
-                      />
-                      <InputField
-                        side='reserved-tokens-input-property reserved-tokens-input-property-right'
-                        type='number'
-                        title={VALUE}
-                        value={token.reservedTokensInput.val}
-                        onChange={this.handleReservedTokensInputValChange}
-                        description={`Value in tokens or percents. Don't forget to press + button for each reserved token.`}
-                      />
-                    </div>
-                    <div className="plus-button-container">
-                        <div onClick={(e) => this.addReservedTokensItem(token.reservedTokensInput.addr, token.reservedTokensInput.dim, token.reservedTokensInput.val)} className="button button_fill button_fill_plus">
-                        </div>
-                    </div>
-                </div>
-                {reservedTokensElements}
-            </div>
-        )
-    }
+    return (
+      <div className="reserved-tokens-container">
+        <div className="reserved-tokens-input-container">
+          <div className="reserved-tokens-input-container-inner">
+            <InputField
+              side="reserved-tokens-input-property reserved-tokens-input-property-left"
+              type="text"
+              title={ADDRESS}
+              value={this.props.reservedTokenInputStore.addr}
+              onChange={e => this.handleAddressChange(e)}
+              description={`Address where to send reserved tokens.`}
+              pristine={this.state.validation.address.pristine}
+              valid={this.state.validation.address.valid}
+              errorMessage="The inserted address is invalid"
+            />
+            <RadioInputField
+              side="reserved-tokens-input-property reserved-tokens-input-property-middle"
+              title={DIMENSION}
+              items={['tokens', 'percentage']}
+              vals={['tokens', 'percentage']}
+              defaultValue={this.props.reservedTokenInputStore.dim}
+              name={'reserved-tokens-dim'}
+              onChange={e => this.updateReservedTokenInput(e, 'dim')}
+              description={`Fixed amount or % of crowdsaled tokens. Will be deposited to the account after fintalization of the crowdsale. `}
+            />
+            <InputField
+              side="reserved-tokens-input-property reserved-tokens-input-property-right"
+              type="number"
+              title={VALUE}
+              value={this.props.reservedTokenInputStore.val}
+              onChange={e => this.updateReservedTokenInput(e, 'val')}
+              description={`Value in tokens or percents. Don't forget to press + button for each reserved token.`}
+            />
+          </div>
+          <div className="plus-button-container">
+            <div onClick={e => this.addReservedTokensItem()} className="button button_fill button_fill_plus" />
+          </div>
+        </div>
+        {reservedTokensElements}
+      </div>
+    );
+  }
 }
