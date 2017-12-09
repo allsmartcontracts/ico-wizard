@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import {inject, observer} from "mobx-react" 
 @inject('locale') @observer
 
-export const Header = () => (
+export class Header = () => (
 	<header className="socials">
     <div className="container">
      const Toolbar = ({locale}) => <div>
@@ -14,7 +14,6 @@ export const Header = () => (
     </select>
 </div>
 
-export default inject("locale")(observer(Toolbar));
     </div>
   </header>
 )
