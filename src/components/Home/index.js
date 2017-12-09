@@ -6,7 +6,7 @@ import {injectIntl} from "react-intl"
 import {inject,observer} from "mobx-react"
 import {formatMessage} from 'format-message'
 
-
+@inject {'locale'} @observer
           
 export class Home extends Component {
   render() {
