@@ -67,5 +67,6 @@ export class Home extends Component {
       </div>
     );
   }
+Home = new injectIntl(observer(Home));
 }
-export default injectIntl(observer(Home));
+
