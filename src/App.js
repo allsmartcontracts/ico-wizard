@@ -18,6 +18,7 @@ import deLocale from 'react-intl/locale-data/de';
 
 addLocaleData([...ruLocale, ...enLocale]);
 
+
 console.log('stepThree', stepThree, 'stepTwo', stepTwo)
 class App extends Component {
   render() {
