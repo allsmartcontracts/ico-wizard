@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-
+import {Header} from '../../components/index'
 import '../../assets/stylesheets/application.css';
 import { Link } from 'react-router-dom'
 import {injectIntl} from "react-intl"
 import {inject,observer} from "mobx-react"
 import {formatMessage} from 'format-message'
-addLocaleData([...ruLocale, ...enLocale]);
+
 
           
 export class Home extends Component {
@@ -67,6 +67,6 @@ export class Home extends Component {
       </div>
     );
   }
-Home = new injectIntl(observer(Home));
+Home = new inject("locale")injectIntl(observer(Home));
 }
 
