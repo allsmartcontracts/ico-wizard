@@ -5,7 +5,7 @@ import ru from './translations/ru'
 import enLocale from 'react-intl/locale-data/en'
 import ruLocale from 'react-intl/locale-data/ru'
 
-class locale {
+export class locale extends Component {
 
 @observable locale
 
