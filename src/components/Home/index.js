@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Header} from '../components/index'
+import {Header} from '../../components/index'
 import '../../assets/stylesheets/application.css';
 import { Link } from 'react-router-dom'
 import {injectIntl} from "react-intl"
