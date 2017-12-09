@@ -11,8 +11,12 @@ import { TOAST } from './utils/constants'
 import { toast } from './utils/utils'
 import {MobxIntlProvider, LocaleStore} from "mobx-react-intl"
 import {addLocaleData} from "react-intl"
+import en from "../translations/en"
+import de from "../translations/ru"
+import enLocale from 'react-intl/locale-data/en';
+import deLocale from 'react-intl/locale-data/de';
 
-
+addLocaleData([...ruLocale, ...enLocale]);
 
 console.log('stepThree', stepThree, 'stepTwo', stepTwo)
 class App extends Component {
