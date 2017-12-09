@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Toolbar} from '../Header/index.js';
+import {Header} from 'Header';
 import '../../assets/stylesheets/application.css';
 import { Link } from 'react-router-dom'
 import {injectIntl} from "react-intl"
