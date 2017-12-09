@@ -7,13 +7,16 @@ import ruLocale from 'react-intl/locale-data/ru'
 
 export class locale extends Component {
 
-@observable locale
+@observable locale;
 
 
 addLocaleData([...ruLocale, ...enLocale]);
+  constructor() {
 const localeStore = new LocaleStore("en", {en, ru});
     const store = {
     locale: localeStore,
 };
+  }
+  
 export default locale;
 export { locale };
