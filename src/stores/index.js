@@ -30,6 +30,6 @@ export {
     tierStore,
     tokenStore,
     web3Store,
-    investStore
+    investStore,
     locale
 };
