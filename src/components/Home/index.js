@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import {injectIntl} from "react-intl"
 import {inject,observer} from "mobx-react"
 import {formatMessage} from 'format-message'
-
+addLocaleData([...ruLocale, ...enLocale]);
 
           
 export class Home extends Component {
