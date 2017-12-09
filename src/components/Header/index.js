@@ -2,6 +2,7 @@ import React from 'react'
 import '../../assets/stylesheets/application.css';
 import { Link } from 'react-router-dom'
 import {inject, observer} from "mobx-react" 
+@inject('locale') @observer
 
 export const Header = () => (
 	<header className="socials">
