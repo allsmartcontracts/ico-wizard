@@ -13,6 +13,7 @@ import crowdsaleBlockListStore from './CrowdsaleBlockListStore'
 import generalStore from './GeneralStore'
 import crowdsalePageStore from './CrowdsalePageStore'
 import investStore from './InvestStore'
+import locale from './locale'
 
 export {
     generalStore,
@@ -30,4 +31,5 @@ export {
     tokenStore,
     web3Store,
     investStore
+    locale
 };
