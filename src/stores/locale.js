@@ -10,7 +10,7 @@ export class locale extends Component {
 @observable locale;
 
 
-addLocaleData([...ruLocale, ...enLocale]);
+
   constructor() {
 const localeStore = new LocaleStore("en", {en, ru});
     const store = {
