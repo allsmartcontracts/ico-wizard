@@ -50,14 +50,15 @@ export function getWeb3(cb) {
   } else {
 	  //get current network
 	  const networkID = ICOConfig.networkID?ICOConfig.networkID:getQueryVariable("networkID");
+	  const InfToken=ICOConfig.InfuraToken;
 	  if (networkName!='ORACLES'){
 	  var networkName = getNetWorkNameById("networkID");
-          let infuraID="https://${networkName}.infura.io/DI0Ayd5pD4v0mFuuR3Zn";
+          let infuraID="https://" + networkName + ".infura.io/" + InfToken;
 		  
 	  var cnetwork
     // window.web3 == web3 most of the time. Don't override the provided,
     // web3, just wrap it in your Web3. adding INFURA for NoMetamsk
-    var infweb3 = new Web3(new Web3.providers.HttpProvider('${infuraID}'));
+    var infweb3 = new Web3(new Web3.providers.HttpProvider('infuraID'));
     var web3=infweb3;
     cb(web3, false);
   }
