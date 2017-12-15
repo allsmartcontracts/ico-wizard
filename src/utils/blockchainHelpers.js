@@ -40,14 +40,9 @@ export function getWeb3(cb) {
   var web3 = window.web3;
 	if (typeof web3 === 'undefined') {
     // no web3, use fallback
-    console.error("Please use a web3 browser");
+    console.log("No Web3 injected, using Infura");
     const devEnvironment = process.env.NODE_ENV === 'development';
-    if (devEnvironment) {
-      web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
-    }
-
-    cb(web3, false);
-  } else {
+    
 	  //get current network
 	  const networkID = ICOConfig.networkID?ICOConfig.networkID:getQueryVariable("networkID");
 	  const InfToken=ICOConfig.InfuraToken;
