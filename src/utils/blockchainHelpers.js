@@ -57,8 +57,7 @@ export function getWeb3(cb) {
     var web3=infweb3;
     cb(web3, false);
   
-	  else {
-	  console.error("Please use a web3 browser");}
+	  
   return web3;
   } 
 	  
