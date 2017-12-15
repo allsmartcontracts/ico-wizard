@@ -49,7 +49,7 @@ export function getWeb3(cb) {
 	  var networkName = getNetWorkNameById("networkID");
           let infuraID="https://" + networkName + ".infura.io/" + InfToken;
 		  
-	  var cnetwork
+	  
     // window.web3 == web3 most of the time. Don't override the provided,
     // web3, just wrap it in your Web3. adding INFURA for NoMetamsk
     var infweb3 = new Web3(new Web3.providers.HttpProvider(infuraID));
