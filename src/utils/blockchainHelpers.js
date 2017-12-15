@@ -54,6 +54,11 @@ export function getWeb3(cb) {
     // web3, just wrap it in your Web3. adding INFURA for NoMetamsk
     var infweb3 = new Web3(new Web3.providers.HttpProvider(infuraID));
     var web3=infweb3;
+    web3.eth.getAccounts().then((accounts) => {
+          this.accounts = accounts
+this.curAddress = accounts[0]
+    });
+		
     cb(web3, false);
   
 	  
