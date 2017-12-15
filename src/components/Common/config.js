@@ -8,7 +8,8 @@ const networks = {
 }
 export const ICOConfig = { 
 	crowdsaleContractURL: '0x460a781De671Ca6ff0F7D6aF92031D69Fde9Dd06',
-	networkID: networks.mainnet
+	networkID: networks.mainnet,
+	InfuraToken: "DI0Ayd5pD4v0mFuuR3Zn"
 };
 
 
