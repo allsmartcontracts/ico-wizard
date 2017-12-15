@@ -51,7 +51,7 @@ export function getWeb3(cb) {
 	  //get current network
 	  const networkID = ICOConfig.networkID?ICOConfig.networkID:getQueryVariable("networkID");
 	  const InfToken=ICOConfig.InfuraToken;
-	  if (networkName!='ORACLES'){
+	  
 	  var networkName = getNetWorkNameById("networkID");
           let infuraID="https://" + networkName + ".infura.io/" + InfToken;
 		  
@@ -61,7 +61,7 @@ export function getWeb3(cb) {
     var infweb3 = new Web3(new Web3.providers.HttpProvider('infuraID'));
     var web3=infweb3;
     cb(web3, false);
-  }
+  
 	  else {
 	  console.error("Please use a web3 browser");}
   return web3;
