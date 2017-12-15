@@ -43,10 +43,10 @@ export function getWeb3(cb) {
     console.log("No Web3 injected, using Infura");
     
 	  //get current network
-	  const networkID = ICOConfig.networkID?ICOConfig.networkID:getQueryVariable("networkID");
+	  
 	  const InfToken=ICOConfig.InfuraToken;
 	  
-	  var networkName = getNetWorkNameById("networkID");
+	  var networkName = getNetWorkNameById(ICOConfig.networkID);
           let infuraID="https://" + networkName + ".infura.io/" + InfToken;
 		  
 	  
